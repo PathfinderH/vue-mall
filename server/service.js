@@ -28,13 +28,6 @@ exports.allIcons = (req, res) => {
     });
 };
 
-//获取content数据
-exports.allContent = (req, res) => {
-    let sql = 'select * from content';
-    db.base(sql, null, (result) => {
-        res.json(result);
-    });
-};
 
 //获取product_list数据
 exports.allProductList = (req, res) => {

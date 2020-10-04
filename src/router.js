@@ -35,7 +35,10 @@ const router = new VueRouter({
 
         //注册登录路由
         { path: '/login', component: LoginContainer },
-        { path: '/register', component: RegisterContainer }
+        { path: '/register', component: RegisterContainer },
+
+
+        // { path: '/search:result ', component: SearchContainer },
     ],
     linkActiveClass: 'van-tabbar-item--active'
 })

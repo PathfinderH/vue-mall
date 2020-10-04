@@ -8,22 +8,42 @@
       @focus="getFocus"
       class="van-hairline--bottom"
     />
-<!-- 侧边导航 -->
+    <!-- 侧边导航 -->
     <van-tree-select
-      :height="this.screeHeight"
+      :height="screeHeight"
       :items="items"
       :main-active-index.sync="active"
     >
       <template #content>
-        <div v-if="active === 0">1</div>
-        <div v-if="active === 1">2</div>
-        <div v-if="active === 2">3</div>
-        <div v-if="active === 3">4</div>
-        <div v-if="active === 4">5</div>
-        <div v-if="active === 5">6</div>
+        <div
+          v-show="active === index"
+          v-for="(item, index) in items"
+          :key="index"
+        >
+          <div class="select-content">
+            <h4>{{ item.text }}</h4>
+
+            <van-row gutter="20">
+              <van-col
+                span="8"
+                v-for="(v, index) in item.child"
+                :key="index"
+                class="select-content-child"
+              >
+                <router-link :to="v.route">
+                  <img
+                    :src="v.img_url"
+                    :style="{ width: scrollWidth * 0.187 + 'px' }"
+                  />
+                
+                <span>{{ v.text }}</span>
+                </router-link>
+              </van-col>
+            </van-row>
+          </div>
+        </div>
       </template>
     </van-tree-select>
-
   </div>
 </template>
 
@@ -31,28 +51,517 @@
 export default {
   data() {
     return {
-      active: 0,//侧边导航显示隐藏
+
+      active: 0, //侧边导航显示隐藏
       items: [
-        { text: "热门推荐" },
-        { text: "手机数码" },
-        { text: "电脑办公" },
-        { text: "家用电器" },
-        { text: "美妆护肤" },
-        { text: "服装衣饰" },
-      ],//侧边导航文本
+        {
+          text: "热门推荐",
+          text_head:'热门分类',
+          child: [
+            {
+              text: "空调",
+              img_url: "http://localhost:3000/src/img/classify/hot/01.jpg",
+              route: "/search",
+            },
+            {
+              text: "冰箱",
+              img_url: "http://localhost:3000/src/img/classify/hot/02.jpg",
+              route: "/search",
+            },
+             {
+              text: "电脑",
+              img_url: "http://localhost:3000/src/img/classify/hot/03.jpg",
+              route: "/search",
+            },
+            {
+              text: "冰箱",
+              img_url: "http://localhost:3000/src/img/classify/hot/04.jpg",
+              route: "/search",
+            },
+             {
+              text: "全面屏手机",
+              img_url: "http://localhost:3000/src/img/classify/hot/05.jpg",
+              route: "/search",
+            },
+            {
+              text: "游戏手机",
+              img_url: "http://localhost:3000/src/img/classify/hot/06.jpg",
+              route: "/search",
+            },
+             {
+              text: "保健品",
+              img_url: "http://localhost:3000/src/img/classify/hot/07.jpg",
+              route: "/search",
+            },
+            {
+              text: "口罩",
+              img_url: "http://localhost:3000/src/img/classify/hot/08.jpg",
+              route: "/search",
+            },
+             {
+              text: "驱蚊用品",
+              img_url: "http://localhost:3000/src/img/classify/hot/09.jpg",
+              route: "/search",
+            },
+            {
+              text: "电磁炉",
+              img_url: "http://localhost:3000/src/img/classify/hot/10.jpg",
+              route: "/search",
+            },
+             {
+              text: "电热水壶",
+              img_url: "http://localhost:3000/src/img/classify/hot/11.jpg",
+              route: "/search",
+            },
+            {
+              text: "数据线",
+              img_url: "http://localhost:3000/src/img/classify/hot/12.jpg",
+              route: "/search",
+            },
+             {
+              text: "图书",
+              img_url: "http://localhost:3000/src/img/classify/hot/13.jpg",
+              route: "/search",
+            },
+             {
+              text: "美妆护肤",
+              img_url: "http://localhost:3000/src/img/classify/hot/14.jpg",
+              route: "/search",
+            },
+            {
+              text: "除菌液",
+              img_url: "http://localhost:3000/src/img/classify/hot/15.jpg",
+              route: "/search",
+            },
+            {
+              text: "休闲零食",
+              img_url: "http://localhost:3000/src/img/classify/hot/16.jpg",
+              route: "/search",
+            },
+             {
+              text: "充电宝",
+              img_url: "http://localhost:3000/src/img/classify/hot/17.jpg",
+              route: "/search",
+            },
+            {
+              text: "体温计",
+              img_url: "http://localhost:3000/src/img/classify/hot/18.jpg",
+              route: "/search",
+            },
+            {
+              text: "投影机",
+              img_url: "http://localhost:3000/src/img/classify/hot/19.jpg",
+              route: "/search",
+            },
+            {
+              text: "游戏机",
+              img_url: "http://localhost:3000/src/img/classify/hot/20.jpg",
+              route: "/search",
+            },
+          ],
+        },
+        {
+          text: "手机数码",
+          text_head:'热门品牌',
+          child: [
+    {
+      text: "小米",
+      img_url: "http://localhost:3000/src/img/classify/phone/01.jpg",
+      route: "/search",
+    },
+    {
+      text: "华为",
+      img_url: "http://localhost:3000/src/img/classify/phone/02.jpg",
+      route: "/search",
+    },
+     {
+      text: "荣耀",
+      img_url: "http://localhost:3000/src/img/classify/phone/03.jpg",
+      route: "/search",
+    },
+    {
+      text: "iPhone",
+      img_url: "http://localhost:3000/src/img/classify/phone/04.jpg",
+      route: "/search",
+    },
+     {
+      text: "vivo",
+      img_url: "http://localhost:3000/src/img/classify/phone/05.jpg",
+      route: "/search",
+    },
+    {
+      text: "OPPO",
+      img_url: "http://localhost:3000/src/img/classify/phone/06.jpg",
+      route: "/search",
+    },
+     {
+      text: "魅族",
+      img_url: "http://localhost:3000/src/img/classify/phone/07.jpg",
+      route: "/search",
+    },
+    {
+      text: "三星",
+      img_url: "http://localhost:3000/src/img/classify/phone/08.jpg",
+      route: "/search",
+    },
+     {
+      text: "一加",
+      img_url: "http://localhost:3000/src/img/classify/phone/09.jpg",
+      route: "/search",
+    },
+    {
+      text: "360手机",
+      img_url: "http://localhost:3000/src/img/classify/phone/10.jpg",
+      route: "/search",
+    },
+     {
+      text: "锤子手机",
+      img_url: "http://localhost:3000/src/img/classify/phone/11.jpg",
+      route: "/search",
+    },
+    {
+      text: "努比亚",
+      img_url: "http://localhost:3000/src/img/classify/phone/12.jpg",
+      route: "/search",
+    },
+  ],
+        },
+        {
+          text: "电脑办公",
+          text_head:'热卖分配',
+          child: [
+    {
+      text: "轻薄本",
+      img_url: "http://localhost:3000/src/img/classify/computer/01.jpg",
+      route: "/search",
+    },
+    {
+      text: "游戏本",
+      img_url: "http://localhost:3000/src/img/classify/computer/02.jpg",
+      route: "/search",
+    },
+     {
+      text: "机械键盘",
+      img_url: "http://localhost:3000/src/img/classify/computer/03.jpg",
+      route: "/search",
+    },
+    {
+      text: "组装电脑",
+      img_url: "http://localhost:3000/src/img/classify/computer/04.jpg",
+      route: "/search",
+    },
+     {
+      text: "移动硬盘",
+      img_url: "http://localhost:3000/src/img/classify/computer/05.jpg",
+      route: "/search",
+    },
+    {
+      text: "显卡",
+      img_url: "http://localhost:3000/src/img/classify/computer/06.jpg",
+      route: "/search",
+    },
+     {
+      text: "游戏台式机",
+      img_url: "http://localhost:3000/src/img/classify/computer/07.jpg",
+      route: "/search",
+    },
+    {
+      text: "家用打印机",
+      img_url: "http://localhost:3000/src/img/classify/computer/08.jpg",
+      route: "/search",
+    },
+     {
+      text: "吃鸡装备",
+      img_url: "http://localhost:3000/src/img/classify/computer/09.jpg",
+      route: "/search",
+    },
+    {
+      text: "曲屏显示器",
+      img_url: "http://localhost:3000/src/img/classify/computer/10.jpg",
+      route: "/search",
+    },
+     {
+      text: "投影机",
+      img_url: "http://localhost:3000/src/img/classify/computer/11.jpg",
+      route: "/search",
+    },
+    {
+      text: "日本文具",
+      img_url: "http://localhost:3000/src/img/classify/computer/12.jpg",
+      route: "/search",
+    },
+     {
+      text: "笔记本",
+      img_url: "http://localhost:3000/src/img/classify/computer/13.jpg",
+      route: "/search",
+    },
+     {
+      text: "平板电脑",
+      img_url: "http://localhost:3000/src/img/classify/computer/14.jpg",
+      route: "/search",
+    },
+    {
+      text: "一体机",
+      img_url: "http://localhost:3000/src/img/classify/computer/15.jpg",
+      route: "/search",
+    },
+  ],
+        },
+        {
+          text: "家用电器",
+          text_head:'厨房小电',
+          child: [
+    {
+      text: "电压力锅",
+      img_url: "http://localhost:3000/src/img/classify/appliances/01.jpg",
+      route: "/search",
+    },
+    {
+      text: "电热水壶",
+      img_url: "http://localhost:3000/src/img/classify/appliances/02.jpg",
+      route: "/search",
+    },
+     {
+      text: "电饭煲",
+      img_url: "http://localhost:3000/src/img/classify/appliances/03.jpg",
+      route: "/search",
+    },
+    {
+      text: "电磁炉",
+      img_url: "http://localhost:3000/src/img/classify/appliances/04.jpg",
+      route: "/search",
+    },
+     {
+      text: "微波炉",
+      img_url: "http://localhost:3000/src/img/classify/appliances/05.jpg",
+      route: "/search",
+    },
+    {
+      text: "电饼铛",
+      img_url: "http://localhost:3000/src/img/classify/appliances/06.jpg",
+      route: "/search",
+    },
+     {
+      text: "豆浆机",
+      img_url: "http://localhost:3000/src/img/classify/appliances/07.jpg",
+      route: "/search",
+    },
+    {
+      text: "多用途锅",
+      img_url: "http://localhost:3000/src/img/classify/appliances/08.jpg",
+      route: "/search",
+    },
+     {
+      text: "料理机",
+      img_url: "http://localhost:3000/src/img/classify/appliances/09.jpg",
+      route: "/search",
+    },
+    {
+      text: "榨汁机",
+      img_url: "http://localhost:3000/src/img/classify/appliances/10.jpg",
+      route: "/search",
+    },
+     {
+      text: "电烤箱",
+      img_url: "http://localhost:3000/src/img/classify/appliances/11.jpg",
+      route: "/search",
+    },
+    {
+      text: "煎药壶",
+      img_url: "http://localhost:3000/src/img/classify/appliances/12.jpg",
+      route: "/search",
+    },
+     {
+      text: "电炖锅",
+      img_url: "http://localhost:3000/src/img/classify/appliances/13.jpg",
+      route: "/search",
+    },
+     {
+      text: "电烧烤炉",
+      img_url: "http://localhost:3000/src/img/classify/appliances/14.jpg",
+      route: "/search",
+    },
+    {
+      text: "面包机",
+      img_url: "http://localhost:3000/src/img/classify/appliances/15.jpg",
+      route: "/search",
+    },
+  ],
+        },
+        {
+          text: "美妆护肤",
+          text_head:'热销种类',
+          child: [
+    {
+      text: "防晒",
+      img_url: "http://localhost:3000/src/img/classify/cosmetics/01.jpg",
+      route: "/search",
+    },
+    {
+      text: "控油",
+      img_url: "http://localhost:3000/src/img/classify/cosmetics/02.jpg",
+      route: "/search",
+    },
+     {
+      text: "面膜",
+      img_url: "http://localhost:3000/src/img/classify/cosmetics/03.jpg",
+      route: "/search",
+    },
+    {
+      text: "显白口红",
+      img_url: "http://localhost:3000/src/img/classify/cosmetics/04.jpg",
+      route: "/search",
+    },
+     {
+      text: "小美盒",
+      img_url: "http://localhost:3000/src/img/classify/cosmetics/05.jpg",
+      route: "/search",
+    },
+    {
+      text: "新片速递",
+      img_url: "http://localhost:3000/src/img/classify/cosmetics/06.jpg",
+      route: "/search",
+    },
+     {
+      text: "精选礼盒",
+      img_url: "http://localhost:3000/src/img/classify/cosmetics/07.jpg",
+      route: "/search",
+    },
+    {
+      text: "潮流风向",
+      img_url: "http://localhost:3000/src/img/classify/cosmetics/08.jpg",
+      route: "/search",
+    },
+     {
+      text: "女士香水",
+      img_url: "http://localhost:3000/src/img/classify/cosmetics/09.jpg",
+      route: "/search",
+    },
+    {
+      text: "男士香水",
+      img_url: "http://localhost:3000/src/img/classify/cosmetics/10.jpg",
+      route: "/search",
+    },
+     {
+      text: "香水礼盒",
+      img_url: "http://localhost:3000/src/img/classify/cosmetics/11.jpg",
+      route: "/search",
+    },
+  ],
+        },
+        {
+          text: "服装衣饰",
+          text_head:'热卖选购',
+          child: [
+    {
+      text: "夹克",
+      img_url: "http://localhost:3000/src/img/classify/clothes/01.jpg",
+      route: "/search",
+    },
+    {
+      text: "T恤",
+      img_url: "http://localhost:3000/src/img/classify/clothes/02.jpg",
+      route: "/search",
+    },
+     {
+      text: "针织衫",
+      img_url: "http://localhost:3000/src/img/classify/clothes/03.jpg",
+      route: "/search",
+    },
+    {
+      text: "衬衫",
+      img_url: "http://localhost:3000/src/img/classify/clothes/04.jpg",
+      route: "/search",
+    },
+     {
+      text: "卫衣",
+      img_url: "http://localhost:3000/src/img/classify/clothes/05.jpg",
+      route: "/search",
+    },
+    {
+      text: "风衣",
+      img_url: "http://localhost:3000/src/img/classify/clothes/06.jpg",
+      route: "/search",
+    },
+     {
+      text: "牛仔裤",
+      img_url: "http://localhost:3000/src/img/classify/clothes/07.jpg",
+      route: "/search",
+    },
+    {
+      text: "休闲裤",
+      img_url: "http://localhost:3000/src/img/classify/clothes/08.jpg",
+      route: "/search",
+    },
+     {
+      text: "自营男装",
+      img_url: "http://localhost:3000/src/img/classify/clothes/09.jpg",
+      route: "/search",
+    },
+    {
+      text: "新品T恤",
+      img_url: "http://localhost:3000/src/img/classify/clothes/10.jpg",
+      route: "/search",
+    },
+     {
+      text: "短袖T恤",
+      img_url: "http://localhost:3000/src/img/classify/clothes/11.jpg",
+      route: "/search",
+    },
+    {
+      text: "新品衬衫",
+      img_url: "http://localhost:3000/src/img/classify/clothes/12.jpg",
+      route: "/search",
+    },
+     {
+      text: "短袖衬衫",
+      img_url: "http://localhost:3000/src/img/classify/clothes/13.jpg",
+      route: "/search",
+    },
+     {
+      text: "新品卫衣",
+      img_url: "http://localhost:3000/src/img/classify/clothes/14.jpg",
+      route: "/search",
+    },
+    {
+      text: "连帽卫衣",
+      img_url: "http://localhost:3000/src/img/classify/clothes/15.jpg",
+      route: "/search",
+    },
+  ],
+        },
+      ], //侧边导航文本
       screeHeight: window.innerHeight - 105 + "px", // 屏幕高
+      scrollWidth: window.innerWidth,
     };
   },
 
   methods: {
+
     getFocus() {
       this.$router.push("/search");
     },
   },
-   
 };
 </script>
 
 <style lang="scss" scoped>
+.van-tree-select {
+  .select-content {
+    padding: 0 8% 0 4%;
+    h4 {
+      margin: 15px 0 0 0;
+    }
+    span{
+      font-size: 12px;
+      color: #787878;
+    }
+  }
+}
+.select-content-child {
+
+  text-align: center;
+  padding-bottom: 14px;
+}
 
 </style>

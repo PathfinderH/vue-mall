@@ -8,8 +8,6 @@ const router = express.Router();
 router.get('/getSwipeImgs', service.getSwipeImgs);
 //主页icon
 router.get('/getIcons', service.allIcons);
-// 主页content
-router.get('/getContent', service.allContent);
 //主页商品列表
 router.get('/getProductList', service.allProductList);
 //获取商品详情
@@ -18,7 +16,7 @@ router.get('/allProductList/product/:id', service.getProduct);
 router.get('/allProductList/getProduct/:id', service.getProductImg);
 //获取购物车信息
 router.get('/getShopcar/:id', service.getShopcar);
-//搜索信息
+//搜索结果信息
 router.get('/getSearch/:info', service.getSearch);
 //注册账号
 router.post('/register', service.register);

@@ -1,10 +1,10 @@
 <template>
-  <div class="shopcar_content" :style="{ width: scrollerWidth }" v-show="$store.state.flag">
+  <div class="shopcar_content"  v-show="$store.state.flag">
     <!-- <div class="backgroundImg" :style="{ height: backgroundImgHeight }"></div> -->
 
     <div class="shopcar">
       <!-- 购物车头部 -->
-      <div class="header" :style="{ height: backgroundImgHeight }">
+      <div class="header">
         <div class="car_bar">
           <!-- <p>{{ $store.getters.getGoodsSelected }}</p> -->
           <h2 class="title">购物车({{ $store.getters.getAllCount }})</h2>
@@ -214,15 +214,6 @@ if(this.$store.state.flag == false){
       Toast.success("删除成功");
     },
   },
-
-  computed: {
-    scrollerWidth() {
-      return window.innerWidth + "px";
-    },
-    backgroundImgHeight() {
-      return window.innerWidth * 0.47 + "px";
-    },
-  },
 };
 </script>
 
@@ -234,6 +225,7 @@ h2 {
 .shopcar_content {
   //购物车头部
   .header {
+    height: 170px;
     background-image: -webkit-linear-gradient(right, #ff5000 0%, #ff8400 100%);
     .car_bar {
       padding: 20px 12px 10px 12px;

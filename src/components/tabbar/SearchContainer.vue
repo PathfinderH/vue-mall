@@ -110,7 +110,7 @@ export default {
     },
 
     onCancel() {
-      this.search_list = [];
+      this.$router.go(-1);
       this.hotSearchFlag();
     },
   },
