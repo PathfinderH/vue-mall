@@ -23,7 +23,7 @@ const router = new VueRouter({
         { path: '/', redirect: '/home' },
         { path: '/home', component: HomeContainer },
         { path: '/classify', component: ClassifyContainer, },
-        { path: '/search', component: SearchContainer },
+        { path: '/search', name: 'search', component: SearchContainer },
         { path: '/shopcar', component: ShopcarContainer },
         { path: '/mine', component: MineContainer },
 
@@ -37,8 +37,6 @@ const router = new VueRouter({
         { path: '/login', component: LoginContainer },
         { path: '/register', component: RegisterContainer },
 
-
-        // { path: '/search:result ', component: SearchContainer },
     ],
     linkActiveClass: 'van-tabbar-item--active'
 })

@@ -1,5 +1,6 @@
 <template>
   <div class="search-container">
+    <!-- <van-loading class="loading" v-show="loading"/> -->
       <van-sticky>
     <form action="/">
       <van-search
@@ -58,10 +59,11 @@ import axios from "axios";
 export default {
   data() {
     return {
+      search:this.$route.params.search,//点击分类页商品传递搜索参数
       hotSearch_flag: true, //热门搜索显示隐藏
       value: "", //搜索框数据
       search_list: [], //搜索结果数据
-      hot_search: [
+      hot_search: [ //热门搜索
         "运动鞋",
         "彩妆",
         "杯",
@@ -73,6 +75,11 @@ export default {
       ],
     };
   },
+created(){
+  // 点击分类页中的商品自动搜索
+  this.value = this.search;
+  this.getSearchResult(this.value);
+},
 
   methods: {
     //点击热门搜索标签
@@ -109,6 +116,7 @@ export default {
       this.getSearchResult(val);
     },
 
+//点击取消
     onCancel() {
       this.$router.go(-1);
       this.hotSearchFlag();

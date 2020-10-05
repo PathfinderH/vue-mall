@@ -41,9 +41,13 @@ import {
     Form,
     Field,
     Popup,
+    Skeleton,
+    Loading
 } from 'vant';
 
 
+Vue.use(Loading);
+Vue.use(Skeleton);
 Vue.use(VueRouter)
 Vue.use(Popup);
 Vue.use(Field);

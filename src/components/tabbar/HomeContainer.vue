@@ -1,7 +1,6 @@
 <template>
   <div class="app-home">
     <!-- 顶部搜索框 -->
-
     <div class="search-fixed">
       <!-- <van-sticky> -->
 
@@ -16,13 +15,13 @@
     </div>
 
     <!-- 轮播图 -->
-    <van-swipe :autoplay="3000">
+    <van-swipe :autoplay="3000" :style="{height: scrollerWidth * 0.32 + 'px'}">
       <van-swipe-item v-for="(image, index) in images" :key="index">
         <img v-lazy="image" />
       </van-swipe-item>
     </van-swipe>
 
-    <!-- 宫格选项 -->
+    <!-- 宫格导航 -->
     <div class="gird-content">
       <div class="radius-head"></div>
       <van-grid
@@ -58,10 +57,123 @@
       </van-grid>
     </div>
 
+
+<!-- 推荐榜单 -->
+<div class="recommend" >
+  <h4 class="recommend_head">推荐榜单</h4>
+    <van-row gutter="0"  type="flex" justify="center">
+  <van-col span="8">
+     <div
+      :style="{
+        height: scrollerWidth * 0.354 + 'px',
+        width: scrollerWidth * 0.3 + 'px',
+      }"
+      class="vertical-swipe"
+    >
+      <div class="van-swipe-item recommend-left">
+        <div class="head-img">
+          <img
+            src="http://localhost:3000/src/img/home_imgs/recommend/recommend_05.webp"
+            :style="{
+              height: scrollerWidth * 0.2 + 'px',
+              width: scrollerWidth * 0.2 + 'px',
+            }"
+          />
+        </div>
+        <div
+          class="text"
+          :style="{
+            height: scrollerWidth * 0.124 + 'px',
+            'padding-bottom': scrollerWidth * 0.187 + 'px',
+          }"
+        >
+          <p class="popular"><span>人气榜</span></p>
+          <p :style="{ 'padding-top': scrollerWidth * 0.04 + 'px'}">电脑DIY配件榜</p>
+          <span>卖爆3132件</span>
+        </div>
+      </div>
+    </div>
+  </van-col>
+  <van-col span="8">
+     <van-swipe
+      :style="{
+        height: scrollerWidth * 0.354 + 'px',
+        width: scrollerWidth * 0.3 + 'px',
+      }"
+      vertical
+      class="vertical-swipe"
+      :touchable="false"
+      :autoplay="3000"
+      :duration="1000"
+      :show-indicators="false"
+    >
+      <van-swipe-item v-for="(item, index) in vertical_swipe" :key="index">
+        <div class="head-img">
+          <img
+            :src="item.img_url"
+            :style="{
+              height: scrollerWidth * 0.2 + 'px',
+              width: scrollerWidth * 0.2 + 'px',
+            }"
+          />
+        </div>
+        <div
+          class="text"
+          :style="{
+            height: scrollerWidth * 0.124 + 'px',
+            'padding-bottom': scrollerWidth * 0.187 + 'px',
+          }"
+        >
+          <p class="popular"><span>人气榜</span></p>
+          <p :style="{ 'padding-top': scrollerWidth * 0.04 + 'px'}">{{item.title}}</p>
+          <span>{{item.text}}</span>
+        </div>
+      </van-swipe-item>
+    </van-swipe>
+  </van-col>
+ <van-col span="8">
+     <div
+      :style="{
+        height: scrollerWidth * 0.354 + 'px',
+        width: scrollerWidth * 0.3 + 'px',
+      }"
+      class="vertical-swipe"
+    >
+      <div class="van-swipe-item recommend-right">
+        <div class="head-img">
+          <img
+            src="http://localhost:3000/src/img/home_imgs/recommend/recommend_04.webp"
+            :style="{
+              height: scrollerWidth * 0.2 + 'px',
+              width: scrollerWidth * 0.2 + 'px',
+            }"
+          />
+        </div>
+        <div
+          class="text"
+          :style="{
+            height: scrollerWidth * 0.124 + 'px',
+            'padding-bottom': scrollerWidth * 0.187 + 'px',
+          }"
+        >
+          <p class="popular"><span>人气榜</span></p>
+          <p :style="{ 'padding-top': scrollerWidth * 0.04 + 'px'}">人气智能电视榜</p>
+          <span>卖爆9.1万件</span>
+        </div>
+      </div>
+    </div>
+  </van-col>
+</van-row>
+</div>
+
+
+
+
+<!-- 中部田字宫格 -->
     <div class="content-gird">
       <van-grid :column-num="2">
         <van-grid-item
-          to="/login"
+          to="/test"
           v-for="(item, index) in content_gird_lsit"
           :key="index"
         >
@@ -96,7 +208,7 @@
 
       <van-grid :column-num="2">
         <van-grid-item
-          to="/login"
+          to="/test"
           v-for="(item, index) in content_gird_lsit"
           :key="index"
         >
@@ -168,20 +280,38 @@
         </van-col>
       </van-row>
     </div>
+ 
   </div>
 </template>
 
 <script>
 import Vue from "vue";
-import { Sticky } from "vant";
 
-Vue.use(Sticky);
 import axios from "axios";
 export default {
   data() {
     return {
-      scrollerWidth: window.innerWidth,
+      loading: true,
+      scrollerWidth: window.innerWidth,//当前设备屏幕宽
       images: [], //轮播图数组
+       vertical_swipe:[
+        {
+          img_url:'http://localhost:3000/src/img/home_imgs/recommend/recommend_01.webp',
+          title:'休闲饼干零食榜',
+          text:'卖爆9.1万件'
+        },
+        {
+          img_url:'http://localhost:3000/src/img/home_imgs/recommend/recommend_02.webp',
+          title:'贴合水润面膜棒',
+          text:'卖爆2.6万件'
+        },
+         {
+          img_url:'http://localhost:3000/src/img/home_imgs/recommend/recommend_03.webp',
+          title:'滋润营养乳液榜',
+          text:'卖爆5752万件'
+        }
+      ],
+
       content_gird_lsit: [
         {
           title: "电脑DIY配件榜",
@@ -211,19 +341,21 @@ export default {
         },
       ],
       product_list: [], //商品数组
-      icons: [],
+      icons: [],//导航图标
     };
   },
   created() {
     this.getSwipeImg();
-    // this.getContent();
     this.getProductList();
     this.getIcons();
   },
-
+mounted(){
+  this.loading = false;
+},
   methods: {
     getFocus() {
       this.$router.push("/search");
+       
     },
 
     //获取轮播图
@@ -283,9 +415,6 @@ export default {
    margin-bottom: 0px !important;
   }
 }
-/* .van-sticky{
-  z-index: 9999;
-} */
 
 /* 轮播索引样式 */
 .van-swipe__indicators {
@@ -305,8 +434,9 @@ export default {
   color: #f0e0dc !important;
 }
 
-/* content-gird */
 
+
+/* content-gird */
 .content-gird {
   margin: 3%;
   border-radius: 10px;
@@ -326,6 +456,7 @@ export default {
 /* 轮播图上分圆弧样式 */
 .gird-content {
   position: relative;
+  margin-bottom: 3%;
 }
 .radius-head {
   position: absolute;
@@ -346,21 +477,26 @@ span {
   margin: 0;
   padding: 0;
 }
-@media screen and (max-width: 376px) {
-  .van-swipe {
-    height: 120px;
-  }
-}
+
 @media screen and (min-width: 767px) {
-  .van-swipe {
-    height: 246px;
+  //竖向轮播
+  .text {
+  p{
+    font-size: 27px !important;
+  }
+  span{
+    font-size: 20px !important;
+    
+  }
+  .popular{
+    span{
+      margin-right: -39px !important;
+    }
   }
 }
-@media screen and (min-width: 1023px) {
-  .van-swipe {
-    height: 328px;
-  }
 }
+
+
 //搜索框固定
 .search-fixed {
   width: 100%;
@@ -372,15 +508,82 @@ span {
 //轮播图样式
 .van-swipe {
   margin-top: 54px;
-  min-height: 120px;
+  // min-height: 120px;
 }
 .van-swipe img {
   width: 100%;
   height: 100%;
 }
 
+
+
+//竖轮播图
+.recommend{
+  padding: 0 2%;
+  .recommend_head{
+    padding: 0 2%;
+  }
+}
+.vertical-swipe {
+
+  border-radius: 5%;
+  overflow: hidden;
+  text-align: center;
+  margin: 0 auto;
+   margin-top: 10%;
+  .van-swipe-item{
+  background-image: -webkit-linear-gradient(right, #ff6600 0%, #ff9b00 100%);
+  }
+  .recommend-right,
+  .recommend-left
+  {
+    background-image: -webkit-linear-gradient(right, #E0A26C 0%, #E8B58B 100%);
+  }
+  .head-img {
+    background-color: #fff;
+  }
+  .text {
+    .popular {
+      position: relative;
+      padding: 0;
+      span {
+        position: absolute;
+        background-color: #fff;
+        color: #ff6c00;
+        border-radius: 200px;
+        padding: 2px 8px;
+        border: 1px solid #ff6f01;
+        right: 50%;
+        margin-right: -26px;
+        bottom: 50%;
+        margin-bottom: -11px;
+      }
+    }
+
+    p {
+      font-size: 13.5px;
+      color: #fff;
+    }
+    span {
+      font-size: 12px;
+      color: #F6E3D2;
+
+    }
+  }
+}
+
+
+
+
+
+
+
+
 //content-gird
 .content-gird {
+    .van-hairline--top::after {
+    border-top-width: 0px;
+}
   .first-text {
     padding: 10px 10px 0 10px;
     span:nth-child(1) {
