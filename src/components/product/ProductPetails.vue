@@ -192,7 +192,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import { Toast } from 'vant';
 
 export default {
@@ -278,8 +277,8 @@ export default {
 
     //商品详情信息获取
     getProduct() {
-      axios
-        .get("http://localhost:3001/allProductList/product/" + this.id)
+      this.axios
+        .get("/allProductList/product/" + this.id)
         .then((response) => {
           this.product = response.data;
           this.sku.price = response.data.price;
@@ -287,18 +286,20 @@ export default {
           this.goods_info.picture = response.data.img_url;
         })
         .catch((error) => {
+          Toast.fail('商品信息获取失败！')
           console.log(error);
         });
     },
     //获取商品详情介绍图片
     getProductImg() {
-      axios
-        .get("http://localhost:3001/allProductList/getProduct/" + this.id)
+      this.axios
+        .get("/allProductList/getProduct/" + this.id)
         .then((response) => {
           this.img_list = response.data.img_url.split(",");
           this.details_list = response.data.details_url.split(",");
         })
         .catch((error) => {
+          Toast.fail('商品介绍信息获取失败！')
           console.log(error);
         });
     },

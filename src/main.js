@@ -11,6 +11,11 @@ import router from './router'
 //导入vuex文件
 import store from './store'
 
+import axios from 'axios'
+
+Vue.prototype.axios = axios
+axios.defaults.baseURL = 'http://localhost:3001'
+
 //按需引入vant-ui
 import {
     Tabbar,

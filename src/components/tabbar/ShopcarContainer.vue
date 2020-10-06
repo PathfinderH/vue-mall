@@ -86,7 +86,7 @@
 
 <script>
 import Vue from "vue";
-import axios from "axios";
+
 import {
   Card,
   SwipeCell,
@@ -152,8 +152,8 @@ if(this.$store.state.flag == false){
       if (idArr.length <= 0) {
         return;
       }
-      axios
-        .get("http://localhost:3001/getShopcar/" + idArr.join(","))
+      this.axios
+        .get("/getShopcar/" + idArr.join(","))
         .then((response) => {
           this.shopcar_list = response.data;
           console.log(response.data);

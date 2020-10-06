@@ -285,9 +285,7 @@
 </template>
 
 <script>
-import Vue from "vue";
 
-import axios from "axios";
 export default {
   data() {
     return {
@@ -360,8 +358,8 @@ mounted(){
 
     //获取轮播图
     getSwipeImg() {
-      axios
-        .get("http://localhost:3001/getSwipeImgs")
+      this.axios
+        .get("/getSwipeImgs")
         .then((response) => {
           response.data.forEach((element) => {
             this.images.push(element);
@@ -372,8 +370,8 @@ mounted(){
         });
     },
     getIcons() {
-      axios
-        .get("http://localhost:3001/getIcons")
+      this.axios
+        .get("/getIcons")
         .then((response) => {
           response.data.forEach((element) => {
             this.icons.push(element);
@@ -386,8 +384,8 @@ mounted(){
 
     //获取底部product_list数据
     getProductList() {
-      axios
-        .get("http://localhost:3001/getProductList")
+      this.axios
+        .get("/getProductList")
         .then((response) => {
           this.product_list = response.data;
         })

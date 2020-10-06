@@ -46,8 +46,7 @@
 </template>
 
 <script>
-
-import axios from "axios";
+import { Toast } from 'vant';
 
 export default {
   data() {
@@ -67,11 +66,12 @@ export default {
       this.show = false;
     },
 
+//提交注册信息
     onSubmit(values) {
       if (this.username != "" && this.password != "") {
         console.log("submit", values);
-        axios
-          .post("http://localhost:3001/register", values)
+        this.axios
+          .post("/register", values)
           .then((response) => {
            if(response.data.flag == 1){
              this.popup_text = '恭喜您注册成功！';
@@ -86,6 +86,7 @@ export default {
            }
           })
           .catch((error) => {
+            Toast.fail('注册失败！')
             console.log(error);
           });
       } else {

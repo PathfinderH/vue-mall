@@ -46,7 +46,6 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
   data() {
@@ -70,8 +69,8 @@ export default {
     onSubmit(values) {
       if (this.username != "" && this.password != "") {
         console.log("submit", values);
-        axios
-          .post("http://localhost:3001/login", values)
+        this.axios
+          .post("/login", values)
           .then((response) => {
             if (response.data.length != 0) {
               this.user = response.data;
@@ -92,6 +91,7 @@ export default {
             }
           })
           .catch((error) => {
+            Toast.fail('登录失败！')
             console.log(error);
           });
       } else {

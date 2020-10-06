@@ -54,7 +54,6 @@
 
 <script>
 
-import axios from "axios";
 
 export default {
   data() {
@@ -99,8 +98,8 @@ created(){
     //获取搜索结果数据
     getSearchResult(val) {
       if (val != "") {
-        axios
-          .get("http://localhost:3001/getSearch/" + val)
+        this.axios
+          .get("/getSearch/" + val)
           .then((response) => {
             this.search_list = response.data;
             this.hotSearchFlag();
