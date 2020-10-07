@@ -104,11 +104,15 @@ exports.register = (req, res) => {
 exports.login = (req, res) => {
     let arr = [];
     let info = req.body;
-    for (const key in info) {
+    for (let key in info) {
         arr.push(info[key]);
     }
     let sql = 'select * from  user where username=? and password=?'
     db.base(sql, arr, (result) => {
-        res.json(result);
+        if (!result.length) {
+            res.json({ msg: 'fail' });
+        } else if (result[0].password == info.password) {
+            return res.json({ msg: 'success' })
+        }
     })
 };

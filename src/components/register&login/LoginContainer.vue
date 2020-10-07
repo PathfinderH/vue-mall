@@ -68,12 +68,12 @@ export default {
 
     onSubmit(values) {
       if (this.username != "" && this.password != "") {
-        console.log("submit", values);
+
         this.axios
           .post("/login", values)
           .then((response) => {
-            if (response.data.length != 0) {
-              this.user = response.data;
+            if (response.data.msg == 'success') {
+              
               this.popup_text = "登录成功！";
               this.showPopup();
               setTimeout(() => {
@@ -81,24 +81,25 @@ export default {
                 this.$router.push("/mine");
               }, 1000);
               this.$store.commit('saveLogin');
-              console.log(this.user);
-            } else {
+
+            } else if(response.data.msg == 'fail') {
+
               this.popup_text = "用户名或密码错误！";
               this.showPopup();
               setTimeout(() => {
                 this.close();
               }, 1000);
             }
+
           })
           .catch((error) => {
-            Toast.fail('登录失败！')
             console.log(error);
           });
+      
       } else {
         this.popup_text = "请输入用户名和密码！";
         this.showPopup();
         setTimeout(() => {
-          this.close();
           this.close();
         }, 1000);
       }
@@ -135,7 +136,7 @@ export default {
 
   //登陆表单
   .logo {
-    background: url(http://127.0.0.1:3000/src/img/home_imgs/logo.png) no-repeat;
+    background: url('/src/img/home_imgs/logo.png') no-repeat;
     background-size: contain;
     width: 80px;
     height: 80px;

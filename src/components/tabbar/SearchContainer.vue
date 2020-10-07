@@ -38,7 +38,7 @@
         :origin-price="item.original_price"
         :title="item.title"
         :thumb="item.img_url"
-        :thumb-link="'http://127.0.0.1:3000/#/home/product' + item.id"
+        :thumb-link="'/#/home/product' + item.id"
       >
         <template #footer>
           <van-row align="center">

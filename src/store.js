@@ -5,20 +5,22 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 let car = JSON.parse(localStorage.getItem('car') || '[]')
-let flag = JSON.parse(localStorage.getItem('flag') || false)
+let isLogin = JSON.parse(sessionStorage.getItem('isLogin') || false)
+
 
 let store = new Vuex.Store({
 
     state: {
-        car: car,
-        flag: flag
+        car: car, //购物车数据
+        isLogin: isLogin, //用户登录状态
+        currentUser: null //当前用户信息
     },
 
     mutations: {
 
         saveLogin(state) {
-            state.flag = true;
-            localStorage.setItem('flag', state.flag)
+            state.isLogin = true;
+            sessionStorage.setItem('isLogin', state.isLogin)
         },
 
 

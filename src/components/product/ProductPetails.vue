@@ -67,14 +67,14 @@
       <div class="content">
         <ul>
           <li>
-            <img src=http://127.0.0.1:3000/src/img/home_imgs/serve_logo.png
+            <img src=/src/img/home_imgs/serve_logo.png
             alt="" srcset="">
             <span class="info-title">付款后48小时内发货</span>
             <p></p>
           </li>
 
           <li>
-            <img src=http://127.0.0.1:3000/src/img/home_imgs/serve_logo.png
+            <img src=/src/img/home_imgs/serve_logo.png
             alt="" srcset="">
             <span class="info-title">7天无理由</span>
             <p>
@@ -82,7 +82,7 @@
             </p>
           </li>
           <li>
-            <img src=http://127.0.0.1:3000/src/img/home_imgs/serve_logo.png
+            <img src=/src/img/home_imgs/serve_logo.png
             alt="" srcset="">
             <span class="info-title">运费险</span>
             <p>
@@ -93,18 +93,18 @@
         <div class="other">其他</div>
         <ul>
           <li>
-            <img src=http://127.0.0.1:3000/src/img/home_imgs/serve_logo.png
+            <img src=/src/img/home_imgs/serve_logo.png
             alt="" srcset="">
             <span class="info-title">信用卡支付</span>
           </li>
 
           <li>
-            <img src=http://127.0.0.1:3000/src/img/home_imgs/serve_logo.png
+            <img src=/src/img/home_imgs/serve_logo.png
             alt="" srcset="">
             <span class="info-title">集分宝</span>
           </li>
           <li>
-            <img src=http://127.0.0.1:3000/src/img/home_imgs/serve_logo.png
+            <img src=/src/img/home_imgs/serve_logo.png
             alt="" srcset="">
             <span class="info-title">支付宝支付</span>
           </li>
@@ -246,7 +246,7 @@ export default {
 
     //商品购买sku
     onAddCartClicked(sku) {
-     if(this.$store.state.flag == true){
+     if(this.$store.state.isLogin == true){
         Toast.success('添加成功,在购物车等亲~') 
       let goodsInfo = {
         id: sku.goodsId,

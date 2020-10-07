@@ -1,5 +1,5 @@
 <template>
-  <div class="shopcar_content"  v-show="$store.state.flag">
+  <div class="shopcar_content"  v-show="$store.state.isLogin">
     <!-- <div class="backgroundImg" :style="{ height: backgroundImgHeight }"></div> -->
 
     <div class="shopcar">
@@ -25,7 +25,7 @@
           :title="item.title"
           :thumb="item.img_url"
           :origin-price="item.original_price"
-          :thumb-link="'http://127.0.0.1:3000/#/home/product' + item.id"
+          :thumb-link="'/#/home/product' + item.id"
         >
           <template #footer>
             <van-stepper
@@ -50,7 +50,7 @@
       <!-- 购物车为空时内容 -->
       <div class="shopcar_null" v-show="shopcar_falg">
         <div class="null_logo">
-          <img src="http://127.0.0.1:3000/src/img/home_imgs/null_logo.webp" />
+          <img src="/src/img/home_imgs/null_logo.webp" />
         </div>
         <h3>购物车竟然是空的</h3>
         <p>再忙,也要记得买点什么犒劳自己~</p>

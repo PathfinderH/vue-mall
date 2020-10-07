@@ -126,7 +126,7 @@ export default {
 
   //登陆表单
   .logo {
-    background: url(http://127.0.0.1:3000/src/img/home_imgs/logo.png) no-repeat;
+    background: url('/src/img/home_imgs/logo.png') no-repeat;
     background-size: contain;
     width: 80px;
     height: 80px;

@@ -1,5 +1,5 @@
 <template>
-  <div class="mine-container" :style="{ width: scrollerWidth }" v-show="$store.state.flag">
+  <div class="mine-container" :style="{ width: scrollerWidth }" v-show="$store.state.isLogin">
     <div class="header" >
       <div class="portrait">
         <van-row>
@@ -32,7 +32,7 @@
             <div>我的评价</div>
           </van-col>
           <van-col span="6">
-            <div>1231</div>
+            <div>0</div>
             <div>红包</div>
           </van-col>
         </van-row>
@@ -110,56 +110,56 @@ export default {
     return {
       order_list: [
         {
-          url: "http://127.0.0.1:3000/src/img/mine/01.webp",
+          url: "/src/img/mine/01.webp",
           text: "待付款",
         },
         {
-          url: "http://127.0.0.1:3000/src/img/mine/02.webp",
+          url: "/src/img/mine/02.webp",
           text: "待发货",
         },
         {
-          url: "http://127.0.0.1:3000/src/img/mine/03.webp",
+          url: "/src/img/mine/03.webp",
           text: "待收货",
         },
         {
-          url: "http://127.0.0.1:3000/src/img/mine/04.webp",
+          url: "/src/img/mine/04.webp",
           text: "评价",
         },
         {
-          url: "http://127.0.0.1:3000/src/img/mine/05.webp",
-          text: "退款/售后",
+          url: "/src/img/mine/05.webp",
+          text: "退款",
         },
       ],
       tool_list: [
         {
-          url: "http://127.0.0.1:3000/src/img/mine/tool_01.webp",
+          url: "/src/img/mine/tool_01.webp",
           text: "每日返现",
-          url2: "http://127.0.0.1:3000/src/img/mine/tool_05.webp",
+          url2: "/src/img/mine/tool_05.webp",
           text2: "花呗",
         },
          {
-          url: "http://127.0.0.1:3000/src/img/mine/tool_02.webp",
+          url: "/src/img/mine/tool_02.webp",
           text: "领券中心",
-          url2: "http://127.0.0.1:3000/src/img/mine/tool_06.webp",
+          url2: "/src/img/mine/tool_06.webp",
           text2: "我的快递",
         },
         {
-          url: "http://127.0.0.1:3000/src/img/mine/tool_03.webp",
+          url: "/src/img/mine/tool_03.webp",
           text: "闲置换钱",
-          url2: "http://127.0.0.1:3000/src/img/mine/tool_07.webp",
+          url2: "/src/img/mine/tool_07.webp",
           text2: "我的评价",
         },
          {
-          url: "http://127.0.0.1:3000/src/img/mine/tool_04.webp",
+          url: "/src/img/mine/tool_04.webp",
           text: "客服小蜜",
-          url2: "http://127.0.0.1:3000/src/img/mine/tool_08.webp",
+          url2: "/src/img/mine/tool_08.webp",
           text2: "主题换肤",
         },
       ],
     };
   },
   created() {
-    if(this.$store.state.flag == false){
+    if(this.$store.state.isLogin == false){
       this.$router.push('/login')
     }
   },
