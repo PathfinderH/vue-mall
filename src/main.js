@@ -14,7 +14,7 @@ import store from './store'
 import axios from 'axios'
 
 Vue.prototype.axios = axios
-axios.defaults.baseURL = 'http://localhost:3001'
+axios.defaults.baseURL = 'http://localhost:3005'
 
 //按需引入vant-ui
 import {

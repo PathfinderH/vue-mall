@@ -1,5 +1,5 @@
 <template>
-  <div class="shopcar_content"  v-show="$store.state.isLogin">
+  <div class="shopcar_content" v-show="$store.state.isLogin">
     <!-- <div class="backgroundImg" :style="{ height: backgroundImgHeight }"></div> -->
 
     <div class="shopcar">
@@ -36,11 +36,10 @@
             <van-checkbox
               ref="checkbox"
               v-model="$store.getters.getGoodsSelected[item.id]"
-              value="checked"
+        
               @click="
                 selectedClick(item.id, $store.getters.getGoodsSelected[item.id])
               "
-              @change="allCheck_change"
               class="checkeds"
             ></van-checkbox>
           </template>
@@ -68,19 +67,23 @@
       :button-text="'结算(' + $store.getters.getGoodsCountAndAmount.count + ')'"
       @submit="onSubmit"
     >
-      <van-checkbox v-model="checked" @click="checkAll">全选</van-checkbox>
+      <van-checkbox v-model="$store.state.check_all" @click="checkAll">全选</van-checkbox>
     </van-submit-bar>
 
     <!-- 删除商品 -->
-    <van-submit-bar
-      v-show="delete_flag"
-      button-text="删除"
-      @submit="delete_product"
-    >
-      <van-checkbox v-model="checked" class="delete_check" @click="checkAll"
-        >全选</van-checkbox
+    <transition name="van-fade">
+      <van-submit-bar
+        class="delete-product"
+        v-show="delete_flag"
+        button-text="删除"
+        @submit="delete_product"
+        button-type="default"
       >
-    </van-submit-bar>
+        <van-checkbox v-model="$store.state.check_all" class="delete_check" @click="checkAll"
+          >全选</van-checkbox
+        >
+      </van-submit-bar>
+    </transition>
   </div>
 </template>
 
@@ -111,29 +114,29 @@ Vue.use(Card);
 export default {
   data() {
     return {
-      checked: false,
       shopcar_list: [], //购物车列表商品信息
       shopcar_falg: false,
       delete_flag: false,
     };
   },
+
   created() {
-   
-   console.log(this.$store.state.flag);
-    
-if(this.$store.state.flag == false){
-    this.$router.push('/login')
-}
+    //  console.log(this.$store.state.isLogin);
+
+    if (this.$store.state.isLogin == false) {
+      this.$router.push("/login");
+    }
     this.getShopcarList();
     this.getShopcarLength();
-  
   },
 
   methods: {
+
     //去逛逛按钮
     goShopcar() {
       this.$router.push("/home");
     },
+
     //判断购物车是否为空
     getShopcarLength() {
       if (this.$store.state.car.length == 0) {
@@ -142,16 +145,20 @@ if(this.$store.state.flag == false){
         this.shopcar_falg = false;
       }
     },
+
     //获取购物车信息
     getShopcarList() {
+
       let idArr = [];
       this.$store.state.car.forEach((item) => {
         idArr.push(item.id);
       });
+
       //购物车中没有商品直接返回
       if (idArr.length <= 0) {
         return;
       }
+
       this.axios
         .get("/getShopcar/" + idArr.join(","))
         .then((response) => {
@@ -162,7 +169,9 @@ if(this.$store.state.flag == false){
           Toast.fail("获取数据失败");
           console.log(error);
         });
+
     },
+
     // 购物车数据中的数据改变时调用mutations中的方法将数据更新到state中
     onChange(goods_id, num) {
       console.log(goods_id);
@@ -171,21 +180,21 @@ if(this.$store.state.flag == false){
         count: num,
       });
     },
+
     //将勾选的商品按钮状态selected更新到state中
     selectedClick(id, val) {
       this.$store.commit("updateGoodsSelected", {
         id,
         selected: val,
       });
+      this.$store.commit("getAllSelected_false");
     },
+
     //全选按钮
     checkAll() {
-      console.log(this.checked);
-      this.$store.commit("updateAllSelected", this.checked);
+      this.$store.commit("updateAllSelected", this.$store.state.check_all);
     },
-    allCheck_change() {
-      console.log(this.checked);
-    },
+
     //提交订单
     onSubmit() {
       if (this.$store.getters.getGoodsCountAndAmount.count != 0) {
@@ -200,7 +209,8 @@ if(this.$store.state.flag == false){
       this.delete_flag = !this.delete_flag;
     },
     delete_product() {
-      Dialog.confirm({
+      if(this.$store.getters.getGoodsCountAndAmount.count != 0){
+        Dialog.confirm({
         title: "确定删除选中的宝贝吗",
         cancelButtonText: "我再想想",
         // message: "确定删除这个宝贝吗",
@@ -209,8 +219,27 @@ if(this.$store.state.flag == false){
           this.confirm();
         })
         .catch(() => {});
+      }else{
+        Toast('您还没有选择宝贝哦！')
+      }
     },
+
+//删除按钮时点击确定
     confirm() {
+      let newCar = [];
+      this.$store.state.car.forEach((element) => {
+        if (element.selected == false) {
+          newCar.push(element);
+        }
+        return newCar;
+      });
+      
+      this.$store.commit("removeProduct", newCar);
+      this.shopcar_list = newCar;
+
+      this.getShopcarList();
+      this.getShopcarLength();
+
       Toast.success("删除成功");
     },
   },
@@ -271,7 +300,7 @@ h2 {
     p {
       padding: 5px 0;
       margin: 0;
-      color: #666693;
+      color: #5f646e;
       font-weight: 100;
     }
     p {
@@ -315,12 +344,6 @@ h2 {
     margin-bottom: -10px;
   }
 
-  //删除商品
-  .delete_check {
-    position: relative;
-    left: 16px;
-  }
-
   //字体设置
   .van-card__price {
     color: #ff5000;
@@ -333,9 +356,21 @@ h2 {
     font-size: 15px;
   }
 
+  //删除商品
   .delete_check {
     position: absolute;
     left: 16px;
+  }
+  .delete-product {
+    .van-submit-bar__button {
+      width: 60px;
+      height: 30px;
+      border: 1px solid #999;
+    }
+    .van-button--default {
+      color: gray;
+      background-color: #f4f4f4;
+    }
   }
 }
 </style>

@@ -5,22 +5,31 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 let car = JSON.parse(localStorage.getItem('car') || '[]')
+let check_all = JSON.parse(localStorage.getItem('check_all') || false)
 let isLogin = JSON.parse(sessionStorage.getItem('isLogin') || false)
-
+let currentUser = JSON.parse(sessionStorage.getItem('currentUser') || null)
 
 let store = new Vuex.Store({
 
     state: {
         car: car, //购物车数据
+        check_all: check_all, //全选按钮状态
         isLogin: isLogin, //用户登录状态
-        currentUser: null //当前用户信息
+        currentUser: currentUser //当前用户信息
     },
 
     mutations: {
 
+        //保存登录状态
         saveLogin(state) {
             state.isLogin = true;
             sessionStorage.setItem('isLogin', state.isLogin)
+        },
+
+        //保存用户信息
+        currentUser(state, info) {
+            state.currentUser = info;
+            sessionStorage.setItem('currentUser', state.currentUser)
         },
 
 
@@ -61,6 +70,14 @@ let store = new Vuex.Store({
                     return true
                 }
             })
+
+            //如果所有按钮都为true状态则全选按钮也为true状态
+            state.car.some(item => {
+                if (item.selected == true) {
+                    state.check_all = true;
+                    return true
+                }
+            })
             localStorage.setItem('car', JSON.stringify(state.car))
         },
 
@@ -70,11 +87,32 @@ let store = new Vuex.Store({
                 item.selected = flag;
             })
             localStorage.setItem('car', JSON.stringify(state.car))
+            localStorage.setItem('check_all', JSON.stringify(state.check_all))
         },
 
+        //当点击购物车选中按钮时遍历所有按钮来决定全选按钮是否选中
+        getAllSelected_false(state) {
+            state.car.some(item => {
+                if (item.selected == false) {
+                    state.check_all = false;
+                    return false
+                }
+            })
 
+            localStorage.setItem('check_all', JSON.stringify(state.check_all))
+        },
+
+        //删除购物车商品
+        removeProduct(state, newCar) {
+            localStorage.removeItem('car');
+            state.car = newCar;
+            localStorage.setItem('car', JSON.stringify(state.car))
+        },
 
     },
+
+
+
     getters: {
 
         //获取购物车中所有商品数量
@@ -118,6 +156,7 @@ let store = new Vuex.Store({
             })
             return o;
         },
+
 
     }
 })

@@ -1,6 +1,6 @@
 <template>
   <div class="search-container">
-    <!-- <van-loading class="loading" v-show="loading"/> -->
+   <!-- 搜索框 -->
       <van-sticky>
     <form action="/">
       <van-search
@@ -14,6 +14,8 @@
       />
     </form>
       </van-sticky>
+
+<!-- 热门搜索 -->
     <div class="search-found" v-show="hotSearch_flag">
       <h4>热门搜索</h4>
       <div class="hot-search">
@@ -30,7 +32,9 @@
         >
       </div>
     </div>
-    <div class="search-content">
+
+<!-- 搜索结果列表 -->
+    <div class="search-content">    
       <van-card
         v-for="(item, index) in search_list"
         :key="index"
@@ -49,6 +53,7 @@
         </template>
       </van-card>
     </div>
+
   </div>
 </template>
 
