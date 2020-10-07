@@ -67,23 +67,20 @@
       <div class="content">
         <ul>
           <li>
-            <img src=/src/img/home_imgs/serve_logo.png
-            alt="" srcset="">
+            <img src=/src/img/home_imgs/serve_logo.png alt="" srcset="">
             <span class="info-title">付款后48小时内发货</span>
             <p></p>
           </li>
 
           <li>
-            <img src=/src/img/home_imgs/serve_logo.png
-            alt="" srcset="">
+            <img src=/src/img/home_imgs/serve_logo.png alt="" srcset="">
             <span class="info-title">7天无理由</span>
             <p>
               满足7天无理由退换货申请的前提下，包邮商品需要买家承担退货邮费，非包邮商品需要买家承担发货和退货邮费。
             </p>
           </li>
           <li>
-            <img src=/src/img/home_imgs/serve_logo.png
-            alt="" srcset="">
+            <img src=/src/img/home_imgs/serve_logo.png alt="" srcset="">
             <span class="info-title">运费险</span>
             <p>
               卖家为您购买的商品投保退货运费险（保单生效以确认订单页展示的运费险为准）
@@ -93,19 +90,16 @@
         <div class="other">其他</div>
         <ul>
           <li>
-            <img src=/src/img/home_imgs/serve_logo.png
-            alt="" srcset="">
+            <img src=/src/img/home_imgs/serve_logo.png alt="" srcset="">
             <span class="info-title">信用卡支付</span>
           </li>
 
           <li>
-            <img src=/src/img/home_imgs/serve_logo.png
-            alt="" srcset="">
+            <img src=/src/img/home_imgs/serve_logo.png alt="" srcset="">
             <span class="info-title">集分宝</span>
           </li>
           <li>
-            <img src=/src/img/home_imgs/serve_logo.png
-            alt="" srcset="">
+            <img src=/src/img/home_imgs/serve_logo.png alt="" srcset="">
             <span class="info-title">支付宝支付</span>
           </li>
         </ul>
@@ -192,7 +186,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+import { Toast } from "vant";
 
 export default {
   data() {
@@ -204,7 +198,7 @@ export default {
       details_list: [], //商品详情图片
       show: false, //动作面板显示隐藏
 
-    flag :false,
+      flag: false, //判断用户是加入购物车操作还是直接购买操作
 
       sku: {
         tree: [],
@@ -225,7 +219,7 @@ export default {
       showSoldout: false,
       closeOnClickOverlay: true, //点击空白处关闭购物框
 
-      customSkuValidator: () => "请选择xxx!", //？？
+      customSkuValidator: () => "请选择商品属性!", //判断用户是否选择商品属性
     };
   },
 
@@ -235,34 +229,41 @@ export default {
   },
 
   methods: {
-    addToShopcar(){
-      this.showBase = true
-      this.flag = false
+    //加入购物车按钮
+    addToShopcar() {
+      if (this.$store.state.isLogin) {
+        this.showBase = true;
+        this.flag = false;
+      } else {
+        this.$router.push("/login");
+      }
     },
-    buy(){
-      this.showBase = true
-      this.flag = true
+
+    //立即购买按钮
+    buy() {
+      if (this.$store.state.isLogin) {
+        this.showBase = true;
+        this.flag = true;
+      } else {
+        this.$router.push("/login");
+      }
     },
 
     //商品购买sku
     onAddCartClicked(sku) {
-     if(this.$store.state.isLogin == true){
-        Toast.success('添加成功,在购物车等亲~') 
+      Toast.success("添加成功,在购物车等亲~");
       let goodsInfo = {
         id: sku.goodsId,
         count: sku.selectedNum,
         price: sku.selectedSkuComb.price,
         selected: false,
       };
-      if(this.flag == false){
+      if (this.flag == false) {
         this.$store.commit("addToCar", goodsInfo);
-      }else if(this.flag == true){
-        Toast.success('购买成功')
+      } else if (this.flag == true) {
+        Toast.success("购买成功");
       }
       this.showBase = false;
-     }else{
-       this.$router.push('/login')
-     }
     },
 
     // ActionSheet
@@ -286,7 +287,7 @@ export default {
           this.goods_info.picture = response.data.img_url;
         })
         .catch((error) => {
-          Toast.fail('商品信息获取失败！')
+          Toast.fail("商品信息获取失败！");
           console.log(error);
         });
     },
@@ -299,7 +300,7 @@ export default {
           this.details_list = response.data.details_url.split(",");
         })
         .catch((error) => {
-          Toast.fail('商品介绍信息获取失败！')
+          Toast.fail("商品介绍信息获取失败！");
           console.log(error);
         });
     },
