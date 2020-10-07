@@ -7,7 +7,7 @@ Vue.use(Vuex)
 let car = JSON.parse(localStorage.getItem('car') || '[]')
 let check_all = JSON.parse(localStorage.getItem('check_all') || false)
 let isLogin = JSON.parse(sessionStorage.getItem('isLogin') || false)
-let currentUser = JSON.parse(sessionStorage.getItem('currentUser') || null)
+let currentUser = JSON.parse(sessionStorage.getItem('currentUser') || [])
 
 let store = new Vuex.Store({
 
@@ -23,13 +23,13 @@ let store = new Vuex.Store({
         //保存登录状态
         saveLogin(state) {
             state.isLogin = true;
-            sessionStorage.setItem('isLogin', state.isLogin)
+            sessionStorage.setItem('isLogin', JSON.stringify(state.isLogin))
         },
 
         //保存用户信息
         currentUser(state, info) {
-            state.currentUser = info;
-            sessionStorage.setItem('currentUser', state.currentUser)
+            state.currentUser.push(info);
+            sessionStorage.setItem('currentUser', JSON.stringify(state.currentUser))
         },
 
 

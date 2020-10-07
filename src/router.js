@@ -16,6 +16,14 @@ import DigitalProductContainer from './components/home_child/DigitalProductConta
 //登录注册组件
 import LoginContainer from './components/register&login/LoginContainer.vue'
 import RegisterContainer from './components/register&login/RegisterContainer.vue'
+
+//个人页面 设置 组件
+import SetContainer from './components/mine/SetContainer.vue'
+//个人页面 我的收货地址 组件
+import MyAddressContainer from './components/mine/MyAddressContainer.vue'
+//个人页面 我的收货地址 编辑收货地址 组件
+import EditAddressContainer from './components/mine/EditAddressContainer.vue'
+
 // 创建路由对象
 const router = new VueRouter({
     routes: [ // 配置路由规则
@@ -37,6 +45,12 @@ const router = new VueRouter({
         { path: '/login', component: LoginContainer },
         { path: '/register', component: RegisterContainer },
 
+        //个人页面设置
+        { path: '/mine/set', component: SetContainer },
+        //我的收货地址
+        { path: '/mine/set/myAddress', component: MyAddressContainer },
+        //编辑收货地址
+        { path: '/mine/set/myAddress/editAddress', component: EditAddressContainer },
     ],
     linkActiveClass: 'van-tabbar-item--active'
 })

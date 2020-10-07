@@ -22,4 +22,6 @@ router.get('/getSearch/:info', service.getSearch);
 router.post('/register', service.register);
 //注册账号
 router.post('/login', service.login);
+//获取用户收货地址
+router.post('/userAdress', service.userAdress);
 module.exports = router;

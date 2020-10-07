@@ -59,13 +59,15 @@ export default {
   },
 
   methods: {
+    //提示框显示
     showPopup() {
       this.show = true;
     },
+    //提示框关闭
     close() {
       this.show = false;
     },
-
+//登录按钮
     onSubmit(values) {
       if (this.username != "" && this.password != "") {
 
@@ -73,7 +75,7 @@ export default {
           .post("/login", values)
           .then((response) => {
             if (response.data.msg == 'success') {
-              
+              console.log(response.data.username);
               this.popup_text = "登录成功！";
               this.showPopup();
               setTimeout(() => {
@@ -81,7 +83,7 @@ export default {
                 this.$router.push("/mine");
               }, 1000);
               this.$store.commit('saveLogin');
-
+              this.$store.commit('currentUser',{id:response.data.id,username:response.data.username})
             } else if(response.data.msg == 'fail') {
 
               this.popup_text = "用户名或密码错误！";

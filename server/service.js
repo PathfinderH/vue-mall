@@ -112,7 +112,17 @@ exports.login = (req, res) => {
         if (!result.length) {
             res.json({ msg: 'fail' });
         } else if (result[0].password == info.password) {
-            return res.json({ msg: 'success' })
+            return res.json({ msg: 'success', username: info.username, id: result[0].id })
         }
     })
 };
+
+//获取用户收货地址
+exports.userAdress = (req, res) => {
+    let info = req.body;
+    let sql = "select * from user_adress where id=?";
+    let data = info.id;
+    db.base(sql, data, (result) => {
+        res.json(result);
+    });
+}

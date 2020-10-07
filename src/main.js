@@ -14,7 +14,7 @@ import store from './store'
 import axios from 'axios'
 
 Vue.prototype.axios = axios
-axios.defaults.baseURL = 'http://localhost:3005'
+axios.defaults.baseURL = 'http://localhost:3001'
 
 //按需引入vant-ui
 import {
@@ -47,10 +47,20 @@ import {
     Field,
     Popup,
     Skeleton,
-    Loading
+    Loading,
+    Cell,
+    CellGroup,
+    NavBar,
+    AddressList,
+    AddressEdit
 } from 'vant';
 
 
+Vue.use(AddressEdit);
+Vue.use(AddressList);
+Vue.use(NavBar);
+Vue.use(Cell);
+Vue.use(CellGroup);
 Vue.use(Loading);
 Vue.use(Skeleton);
 Vue.use(VueRouter)

@@ -5,16 +5,15 @@
         <van-row>
           <van-col span="6"
             ><van-image
-            @click="$router.push('/login')"
               cover
               round
               width="4rem"
               height="4rem"
               src="http://gw.alicdn.com/sns_logo/i4/O1CN01RQD3d21PgVCYh3yBd_!!0-mytaobao.jpg_100x100q90_.webp"
           /></van-col>
-          <van-col span="12"><h3>怎么始终牵挂丶</h3></van-col>
+          <van-col span="12"><h3>用户：{{$store.state.currentUser[0].username}}</h3></van-col>
           <van-col span="6" class="set"
-            ><h3><van-icon name="setting-o" /></h3
+            ><h3><router-link to="/mine/set"><van-icon name="setting-o" /></router-link></h3
           ></van-col>
         </van-row>
 
@@ -192,6 +191,9 @@ export default {
     .set {
       text-align: right;
       padding: 4px 20px 0 0;
+      a{
+        color: #fff;
+      }
     }
   }
   .DFrameLayout {
