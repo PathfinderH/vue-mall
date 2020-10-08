@@ -73,7 +73,7 @@
       <div class="van-swipe-item recommend-left">
         <div class="head-img">
           <img
-            src="http://localhost:3000/src/img/home_imgs/recommend/recommend_05.webp"
+            src="/src/assets/img/home_imgs/recommend/recommend_05.webp"
             :style="{
               height: scrollerWidth * 0.2 + 'px',
               width: scrollerWidth * 0.2 + 'px',
@@ -142,7 +142,7 @@
       <div class="van-swipe-item recommend-right">
         <div class="head-img">
           <img
-            src="http://localhost:3000/src/img/home_imgs/recommend/recommend_04.webp"
+            src="/src/assets/img/home_imgs/recommend/recommend_04.webp"
             :style="{
               height: scrollerWidth * 0.2 + 'px',
               width: scrollerWidth * 0.2 + 'px',
@@ -294,17 +294,17 @@ export default {
       images: [], //轮播图数组
        vertical_swipe:[
         {
-          img_url:'http://localhost:3000/src/img/home_imgs/recommend/recommend_01.webp',
+          img_url:'/src/assets/img/home_imgs/recommend/recommend_01.webp',
           title:'休闲饼干零食榜',
           text:'卖爆9.1万件'
         },
         {
-          img_url:'http://localhost:3000/src/img/home_imgs/recommend/recommend_02.webp',
+          img_url:'/src/assets/img/home_imgs/recommend/recommend_02.webp',
           title:'贴合水润面膜棒',
           text:'卖爆2.6万件'
         },
          {
-          img_url:'http://localhost:3000/src/img/home_imgs/recommend/recommend_03.webp',
+          img_url:'/src/assets/img/home_imgs/recommend/recommend_03.webp',
           title:'滋润营养乳液榜',
           text:'卖爆5752万件'
         }
@@ -315,27 +315,27 @@ export default {
           title: "电脑DIY配件榜",
           title_badge: "人气榜",
           title_two: "卖爆3318件",
-          img_one: "http://localhost:3000/src/img/home_imgs/01.webp",
-          img_two: "http://localhost:3000/src/img/home_imgs/02.webp",
+          img_one: "/src/assets/img/home_imgs/01.webp",
+          img_two: "/src/assets/img/home_imgs/02.webp",
 
           title2: "人气轻薄本榜",
           title_badge2: "趋势榜",
           title_two2: "本周趋势上升59%",
-          img_one2: "http://localhost:3000/src/img/home_imgs/05.webp",
-          img_two2: "http://localhost:3000/src/img/home_imgs/06.webp",
+          img_one2: "/src/assets/img/home_imgs/05.webp",
+          img_two2: "/src/assets/img/home_imgs/06.webp",
         },
         {
           title: "乐享鲜汤炖锅榜",
           title_badge: "人气榜",
           title_two: "卖爆5097件",
-          img_one: "http://localhost:3000/src/img/home_imgs/03.webp",
-          img_two: "http://localhost:3000/src/img/home_imgs/04.webp",
+          img_one: "/src/assets/img/home_imgs/03.webp",
+          img_two: "/src/assets/img/home_imgs/04.webp",
 
           title2: "时尚保鲜冰箱榜",
           title_badge2: "趋势榜",
           title_two2: "本周趋势上升71%",
-          img_one2: "http://localhost:3000/src/img/home_imgs/07.webp",
-          img_two2: "http://localhost:3000/src/img/home_imgs/08.webp",
+          img_one2: "/src/assets/img/home_imgs/07.webp",
+          img_two2: "/src/assets/img/home_imgs/08.webp",
         },
       ],
       product_list: [], //商品数组

@@ -118,11 +118,11 @@ exports.login = (req, res) => {
 };
 
 //获取用户收货地址
-exports.userAdress = (req, res) => {
-    let info = req.body;
-    let sql = "select * from user_adress where id=?";
-    let data = info.id;
-    db.base(sql, data, (result) => {
-        res.json(result);
-    });
-}
+// exports.userAdress = (req, res) => {
+//     let info = req.body;
+//     let sql = "select * from user_adress where id=?";
+//     let data = info.id;
+//     db.base(sql, data, (result) => {
+//         res.json(result);
+//     });
+// }

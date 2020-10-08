@@ -21,8 +21,6 @@ import RegisterContainer from './components/register&login/RegisterContainer.vue
 import SetContainer from './components/mine/SetContainer.vue'
 //个人页面 我的收货地址 组件
 import MyAddressContainer from './components/mine/MyAddressContainer.vue'
-//个人页面 我的收货地址 编辑收货地址 组件
-import EditAddressContainer from './components/mine/EditAddressContainer.vue'
 
 // 创建路由对象
 const router = new VueRouter({
@@ -33,7 +31,7 @@ const router = new VueRouter({
         { path: '/classify', component: ClassifyContainer, },
         { path: '/search', name: 'search', component: SearchContainer },
         { path: '/shopcar', component: ShopcarContainer },
-        { path: '/mine', component: MineContainer },
+        { path: '/mine', component: MineContainer, },
 
         // 商品详情页面路由
         { path: '/home/product:id', component: ProductPetails },
@@ -49,10 +47,10 @@ const router = new VueRouter({
         { path: '/mine/set', component: SetContainer },
         //我的收货地址
         { path: '/mine/set/myAddress', component: MyAddressContainer },
-        //编辑收货地址
-        { path: '/mine/set/myAddress/editAddress', component: EditAddressContainer },
+
     ],
-    linkActiveClass: 'van-tabbar-item--active'
+    linkActiveClass: 'van-tabbar-item--active',
+
 })
 
 

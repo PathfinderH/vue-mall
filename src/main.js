@@ -11,9 +11,15 @@ import router from './router'
 //导入vuex文件
 import store from './store'
 
+import area from "./assets/js/area";
+
+import info from "./assets/js/info";
+
 import axios from 'axios'
 
 Vue.prototype.axios = axios
+Vue.prototype.area = area
+Vue.prototype.info = info
 axios.defaults.baseURL = 'http://localhost:3001'
 
 //按需引入vant-ui

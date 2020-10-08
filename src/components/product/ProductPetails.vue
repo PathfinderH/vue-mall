@@ -3,7 +3,7 @@
     <!-- 轮播 -->
     <div :style="{ height: scrollerWidth }" class="swipe">
       <div class="nav-bar">
-        <span class="btn-back" @click="$router.back(-1)">
+        <span class="btn-back" @click="$router.back()">
           <van-icon name="arrow-left" color="#fff" size="23" />
         </span>
         <span class="btn-cart" @click="$router.push('/shopcar')">
@@ -67,20 +67,20 @@
       <div class="content">
         <ul>
           <li>
-            <img src=/src/img/home_imgs/serve_logo.png alt="" srcset="">
+            <img src=/src/assets/img/home_imgs/serve_logo.png alt="" srcset="">
             <span class="info-title">付款后48小时内发货</span>
             <p></p>
           </li>
 
           <li>
-            <img src=/src/img/home_imgs/serve_logo.png alt="" srcset="">
+            <img src=/src/assets/img/home_imgs/serve_logo.png alt="" srcset="">
             <span class="info-title">7天无理由</span>
             <p>
               满足7天无理由退换货申请的前提下，包邮商品需要买家承担退货邮费，非包邮商品需要买家承担发货和退货邮费。
             </p>
           </li>
           <li>
-            <img src=/src/img/home_imgs/serve_logo.png alt="" srcset="">
+            <img src=/src/assets/img/home_imgs/serve_logo.png alt="" srcset="">
             <span class="info-title">运费险</span>
             <p>
               卖家为您购买的商品投保退货运费险（保单生效以确认订单页展示的运费险为准）
@@ -90,16 +90,16 @@
         <div class="other">其他</div>
         <ul>
           <li>
-            <img src=/src/img/home_imgs/serve_logo.png alt="" srcset="">
+            <img src=/src/assets/img/home_imgs/serve_logo.png alt="" srcset="">
             <span class="info-title">信用卡支付</span>
           </li>
 
           <li>
-            <img src=/src/img/home_imgs/serve_logo.png alt="" srcset="">
+            <img src=/src/assets/img/home_imgs/serve_logo.png alt="" srcset="">
             <span class="info-title">集分宝</span>
           </li>
           <li>
-            <img src=/src/img/home_imgs/serve_logo.png alt="" srcset="">
+            <img src=/src/assets/img/home_imgs/serve_logo.png alt="" srcset="">
             <span class="info-title">支付宝支付</span>
           </li>
         </ul>
@@ -260,6 +260,7 @@ export default {
       };
       if (this.flag == false) {
         this.$store.commit("addToCar", goodsInfo);
+        this.$store.commit("getAllSelected_false");//判断全选按钮
       } else if (this.flag == true) {
         Toast.success("购买成功");
       }

@@ -1,5 +1,5 @@
 <template>
-  <div class="login" :style="{ height: scrollerWidth }">
+  <div class="login" :style="{ height: scrollerHight + 'px'}">
     <div class="header">
       欢迎注册
       <span @click="$router.push('/mine')">关闭</span>
@@ -51,6 +51,7 @@ import { Toast } from 'vant';
 export default {
   data() {
     return {
+      scrollerHight: window.innerHeight ,
       username: "",
       password: "",
       show: false,//弹出框显示隐藏
@@ -96,11 +97,8 @@ export default {
     },
   },
 
-  computed: {
-    scrollerWidth() {
-      return window.innerHeight + "px";
-    },
-  },
+
+
 };
 </script>
 
@@ -126,7 +124,7 @@ export default {
 
   //登陆表单
   .logo {
-    background: url('/src/img/home_imgs/logo.png') no-repeat;
+    background: url('/src/assets/img/home_imgs/logo.png') no-repeat;
     background-size: contain;
     width: 80px;
     height: 80px;

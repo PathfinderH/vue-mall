@@ -52,7 +52,6 @@ export default {
     return {
       username: "",
       password: "",
-      user: [], //用户信息
       show: false,
       popup_text: "",
     };
@@ -138,7 +137,7 @@ export default {
 
   //登陆表单
   .logo {
-    background: url('/src/img/home_imgs/logo.png') no-repeat;
+    background: url('/src/assets/img/home_imgs/logo.png') no-repeat;
     background-size: contain;
     width: 80px;
     height: 80px;

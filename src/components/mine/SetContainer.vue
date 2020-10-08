@@ -33,11 +33,13 @@
         v-for="(item, index) in cell_list"
         :key="index"
       />
+      <van-cell title="退出登录" is-link class="log-out" @click="logOut"/>
     </div>
   </div>
 </template>
 
 <script>
+import { Toast } from "vant";
 export default {
   data() {
     return {
@@ -49,7 +51,6 @@ export default {
         { title: "通用", to: "/mine/set/general" },
         { title: "问题反馈", to: "/mine/set/feedback " },
         { title: "关于Vue-Mall", to: "/mine/set/about" },
-        { title: "退出登录", to: "/mine/set/logOut" },
       ],
     };
   },
@@ -58,7 +59,16 @@ export default {
       this.$router.push("/mine");
     },
     onClickRight() {
-      console.log(2);
+      // Toast.
+    },
+
+    logOut() {
+      localStorage.removeItem("isLogin");
+      this.$router.push("/login");
+    },
+
+    test() {
+      Toast.fail("功能未完成");
     },
   },
 };
@@ -101,10 +111,10 @@ export default {
     .van-cell:nth-child(-n + 3) {
       margin-bottom: 10px;
     }
-      .van-cell:last-child{
-          margin-top: 10px;
-          text-align: center;
-      }
+    .log-out {
+      text-align: center;
+      margin-top: 10px;
+    }
   }
 }
 </style>

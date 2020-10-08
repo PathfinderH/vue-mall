@@ -6,8 +6,9 @@ Vue.use(Vuex)
 
 let car = JSON.parse(localStorage.getItem('car') || '[]')
 let check_all = JSON.parse(localStorage.getItem('check_all') || false)
-let isLogin = JSON.parse(sessionStorage.getItem('isLogin') || false)
-let currentUser = JSON.parse(sessionStorage.getItem('currentUser') || [])
+let isLogin = JSON.parse(localStorage.getItem('isLogin') || false)
+let currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]')
+let address = JSON.parse(localStorage.getItem('address') || '[]')
 
 let store = new Vuex.Store({
 
@@ -15,23 +16,50 @@ let store = new Vuex.Store({
         car: car, //购物车数据
         check_all: check_all, //全选按钮状态
         isLogin: isLogin, //用户登录状态
-        currentUser: currentUser //当前用户信息
+        currentUser: currentUser, //当前用户信息
+        address: address //收货地址
     },
 
     mutations: {
 
+
+        //新增用户收货地址信息
+        saveAdress(state, info) {
+            if (info.isDefault == true) {
+                state.address.some((item) => {
+                    if (item.isDefault == true) {
+                        item.isDefault = false;
+                        return true;
+                    }
+                })
+            }
+            state.address.push(info);
+            localStorage.setItem('address', JSON.stringify(state.address))
+        },
+
+        //修改用户收货地址信息
+        editAdress(state, info) {
+            state.address.splice(info.id, 1, info);
+            localStorage.setItem('address', JSON.stringify(state.address))
+        },
+
+        //删除用户收货地址信息
+        deleteAdress(state, id) {
+            state.address.splice(id, 1);
+            localStorage.setItem('address', JSON.stringify(state.address))
+        },
+
         //保存登录状态
         saveLogin(state) {
             state.isLogin = true;
-            sessionStorage.setItem('isLogin', JSON.stringify(state.isLogin))
+            localStorage.setItem('isLogin', JSON.stringify(state.isLogin))
         },
 
         //保存用户信息
         currentUser(state, info) {
             state.currentUser.push(info);
-            sessionStorage.setItem('currentUser', JSON.stringify(state.currentUser))
+            localStorage.setItem('currentUser', JSON.stringify(state.currentUser))
         },
-
 
         //点击加入购物车将商品信息保存到store中的car数组中
         addToCar(state, goodsInfo) {
@@ -104,7 +132,6 @@ let store = new Vuex.Store({
 
         //删除购物车商品
         removeProduct(state, newCar) {
-            localStorage.removeItem('car');
             state.car = newCar;
             localStorage.setItem('car', JSON.stringify(state.car))
         },
@@ -114,6 +141,7 @@ let store = new Vuex.Store({
 
 
     getters: {
+
 
         //获取购物车中所有商品数量
         getAllCount(state) {

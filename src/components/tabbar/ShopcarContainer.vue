@@ -49,7 +49,7 @@
       <!-- 购物车为空时内容 -->
       <div class="shopcar_null" v-show="shopcar_falg">
         <div class="null_logo">
-          <img src="/src/img/home_imgs/null_logo.webp" />
+          <img src="/src/assets/img/home_imgs/null_logo.webp" />
         </div>
         <h3>购物车竟然是空的</h3>
         <p>再忙,也要记得买点什么犒劳自己~</p>
