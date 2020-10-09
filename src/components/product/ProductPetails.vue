@@ -1,7 +1,7 @@
 <template>
   <div class="product">
     <!-- 轮播 -->
-    <div :style="{ height: scrollerWidth }" class="swipe">
+    <div :style="{ height: scrollerWidth + 'px'}" class="swipe">
       <div class="nav-bar">
         <span class="btn-back" @click="$router.back()">
           <van-icon name="arrow-left" color="#fff" size="23" />
@@ -192,6 +192,7 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
+      scrollerWidth: window.innerWidth,//屏幕宽
       product: {}, //商品信息
       current: 0, //轮播
       img_list: [], //商品轮播图片信息
@@ -201,10 +202,95 @@ export default {
       flag: false, //判断用户是加入购物车操作还是直接购买操作
 
       sku: {
-        tree: [],
+        tree: [
+          {
+            k: "颜色",
+            k_id: "1",
+            v: [
+              {
+                id: "30349",
+                name: "天蓝色",
+                imgUrl: this.img_list,
+              },
+              {
+                id: "1215",
+                name: "白色",
+                imgUrl: this.img_list,
+              },
+            ],
+            k_s: "s1",
+            count: 1,
+          },
+          {
+            k: "尺寸",
+            k_id: "2",
+            v: [
+              {
+                id: "1193",
+                name: "大",
+              },
+              {
+                id: "1194",
+                name: "小",
+              },
+            ],
+            k_s: "s2",
+            count: 1,
+          },
+        ],
+        list: [
+          {
+            id: 2259,
+            price: 120, //价格
+            discount: 122,
+            s1: "1215",
+            s2: "1193",
+            s3: "0",
+            s4: "0",
+            s5: "0",
+            stock_num: 20, //库存
+            goods_id: 946755,
+          },
+          {
+            id: 2260,
+            price: 110,
+            discount: 112,
+            s1: "1215",
+            s2: "1194",
+            s3: "0",
+            s4: "0",
+            s5: "0",
+            stock_num: 2, //库存
+            goods_id: 946755,
+          },
+          {
+            id: 2257,
+            price: 130,
+            discount: 132,
+            s1: "30349",
+            s2: "1193",
+            s3: "0",
+            s4: "0",
+            s5: "0",
+            stock_num: 40, //库存
+            goods_id: 946755,
+          },
+          {
+            id: 2258,
+            price: 100,
+            discount: 100,
+            s1: "30349",
+            s2: "1194",
+            s3: "0",
+            s4: "0",
+            s5: "0",
+            stock_num: 50, //库存
+            goods_id: 946755,
+          },
+        ],
         price: "", //价格
         stock_num: "", // 商品总库存
-        none_sku: true, // 是否无规格商品 false正常显示那些可供选择的标准，此处是颜色和尺寸
+        none_sku: false, // 是否无规格商品 false正常显示那些可供选择的标准，此处是颜色和尺寸
         hide_stock: false, // 是否隐藏剩余库存 false正常显示剩余多少件的那个库存
       },
 
@@ -260,7 +346,7 @@ export default {
       };
       if (this.flag == false) {
         this.$store.commit("addToCar", goodsInfo);
-        this.$store.commit("getAllSelected_false");//判断全选按钮
+        this.$store.commit("getAllSelected_false"); //判断全选按钮
       } else if (this.flag == true) {
         Toast.success("购买成功");
       }
@@ -306,11 +392,7 @@ export default {
         });
     },
   },
-  computed: {
-    scrollerWidth() {
-      return window.innerWidth + "px";
-    },
-  },
+
 };
 </script>
 

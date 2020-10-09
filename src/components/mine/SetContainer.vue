@@ -64,6 +64,7 @@ export default {
 
     logOut() {
       localStorage.removeItem("isLogin");
+      localStorage.removeItem("currentUser");
       this.$router.push("/login");
     },
 

@@ -49,7 +49,7 @@
 
 <script>
 import { Toast } from "vant";
-
+import area from "../../assets/js/area";
 export default {
   data() {
     return {
@@ -58,7 +58,7 @@ export default {
       chosenAddressId: "1", //当前选中地址的ID
       list: [], //收货地址
       address_info: {}, //收货地址初始值
-      areaList: this.area, //省市数据
+      areaList: area, //省市数据
       head_title: "",
     };
   },

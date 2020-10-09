@@ -20,14 +20,6 @@ exports.getSwipeImgs = (req, res) => {
     res.json(filesPath)
 }
 
-//获取icon
-exports.allIcons = (req, res) => {
-    let sql = 'select * from home_icon';
-    db.base(sql, null, (result) => {
-        res.json(result);
-    });
-};
-
 
 //获取product_list数据
 exports.allProductList = (req, res) => {

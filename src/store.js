@@ -120,6 +120,7 @@ let store = new Vuex.Store({
 
         //当点击购物车选中按钮时遍历所有按钮来决定全选按钮是否选中
         getAllSelected_false(state) {
+
             state.car.some(item => {
                 if (item.selected == false) {
                     state.check_all = false;

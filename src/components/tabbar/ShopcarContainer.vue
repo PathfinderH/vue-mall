@@ -36,7 +36,6 @@
             <van-checkbox
               ref="checkbox"
               v-model="$store.getters.getGoodsSelected[item.id]"
-        
               @click="
                 selectedClick(item.id, $store.getters.getGoodsSelected[item.id])
               "
@@ -67,7 +66,9 @@
       :button-text="'结算(' + $store.getters.getGoodsCountAndAmount.count + ')'"
       @submit="onSubmit"
     >
-      <van-checkbox v-model="$store.state.check_all" @click="checkAll">全选</van-checkbox>
+      <van-checkbox v-model="$store.state.check_all" @click="checkAll"
+        >全选</van-checkbox
+      >
     </van-submit-bar>
 
     <!-- 删除商品 -->
@@ -79,7 +80,10 @@
         @submit="delete_product"
         button-type="default"
       >
-        <van-checkbox v-model="$store.state.check_all" class="delete_check" @click="checkAll"
+        <van-checkbox
+          v-model="$store.state.check_all"
+          class="delete_check"
+          @click="checkAll"
           >全选</van-checkbox
         >
       </van-submit-bar>
@@ -88,29 +92,6 @@
 </template>
 
 <script>
-import Vue from "vue";
-
-import {
-  Card,
-  SwipeCell,
-  Stepper,
-  SubmitBar,
-  Checkbox,
-  CheckboxGroup,
-  Sticky,
-  Toast,
-  Dialog,
-} from "vant";
-
-Vue.use(Dialog);
-Vue.use(Sticky);
-Vue.use(Checkbox);
-Vue.use(CheckboxGroup);
-Vue.use(SubmitBar);
-Vue.use(Stepper);
-Vue.use(SwipeCell);
-Vue.use(Card);
-
 export default {
   data() {
     return {
@@ -131,7 +112,6 @@ export default {
   },
 
   methods: {
-
     //去逛逛按钮
     goShopcar() {
       this.$router.push("/home");
@@ -140,6 +120,7 @@ export default {
     //判断购物车是否为空
     getShopcarLength() {
       if (this.$store.state.car.length == 0) {
+        this.$store.state.commit("getAllSelected_false");
         this.shopcar_falg = true;
       } else {
         this.shopcar_falg = false;
@@ -148,7 +129,6 @@ export default {
 
     //获取购物车信息
     getShopcarList() {
-
       let idArr = [];
       this.$store.state.car.forEach((item) => {
         idArr.push(item.id);
@@ -169,7 +149,6 @@ export default {
           Toast.fail("获取数据失败");
           console.log(error);
         });
-
     },
 
     // 购物车数据中的数据改变时调用mutations中的方法将数据更新到state中
@@ -209,22 +188,22 @@ export default {
       this.delete_flag = !this.delete_flag;
     },
     delete_product() {
-      if(this.$store.getters.getGoodsCountAndAmount.count != 0){
+      if (this.$store.getters.getGoodsCountAndAmount.count != 0) {
         Dialog.confirm({
-        title: "确定删除选中的宝贝吗",
-        cancelButtonText: "我再想想",
-        // message: "确定删除这个宝贝吗",
-      })
-        .then(() => {
-          this.confirm();
+          title: "确定删除选中的宝贝吗",
+          cancelButtonText: "我再想想",
+          // message: "确定删除这个宝贝吗",
         })
-        .catch(() => {});
-      }else{
-        Toast('您还没有选择宝贝哦！')
+          .then(() => {
+            this.confirm();
+          })
+          .catch(() => {});
+      } else {
+        Toast("您还没有选择宝贝哦！");
       }
     },
 
-//删除按钮时点击确定
+    //删除按钮时点击确定
     confirm() {
       let newCar = [];
       this.$store.state.car.forEach((element) => {
@@ -233,7 +212,7 @@ export default {
         }
         return newCar;
       });
-      
+
       this.$store.commit("removeProduct", newCar);
       this.shopcar_list = newCar;
 

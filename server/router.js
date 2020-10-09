@@ -6,8 +6,6 @@ const router = express.Router();
 
 //轮播图
 router.get('/getSwipeImgs', service.getSwipeImgs);
-//主页icon
-router.get('/getIcons', service.allIcons);
 //主页商品列表
 router.get('/getProductList', service.allProductList);
 //获取商品详情
@@ -20,8 +18,7 @@ router.get('/getShopcar/:id', service.getShopcar);
 router.get('/getSearch/:info', service.getSearch);
 //注册账号
 router.post('/register', service.register);
-//注册账号
+//登录账号
 router.post('/login', service.login);
-//获取用户收货地址
-// router.post('/userAdress', service.userAdress);
+
 module.exports = router;

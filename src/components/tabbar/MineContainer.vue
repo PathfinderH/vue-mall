@@ -103,59 +103,13 @@
 </template>
 
 <script>
-
+import info from '../../assets/js/info.js'
 export default {
   data() {
     return {
       scrollerWidth: window.innerWidth,
-      order_list: [
-        {
-          url: "/src/assets/img/mine/01.webp",
-          text: "待付款",
-        },
-        {
-          url: "/src/assets/img/mine/02.webp",
-          text: "待发货",
-        },
-        {
-          url: "/src/assets/img/mine/03.webp",
-          text: "待收货",
-        },
-        {
-          url: "/src/assets/img/mine/04.webp",
-          text: "评价",
-        },
-        {
-          url: "/src/assets/img/mine/05.webp",
-          text: "退款",
-        },
-      ],
-      tool_list: [
-        {
-          url: "/src/assets/img/mine/tool_01.webp",
-          text: "每日返现",
-          url2: "/src/assets/img/mine/tool_05.webp",
-          text2: "花呗",
-        },
-         {
-          url: "/src/assets/img/mine/tool_02.webp",
-          text: "领券中心",
-          url2: "/src/assets/img/mine/tool_06.webp",
-          text2: "我的快递",
-        },
-        {
-          url: "/src/assets/img/mine/tool_03.webp",
-          text: "闲置换钱",
-          url2: "/src/assets/img/mine/tool_07.webp",
-          text2: "我的评价",
-        },
-         {
-          url: "/src/assets/img/mine/tool_04.webp",
-          text: "客服小蜜",
-          url2: "/src/assets/img/mine/tool_08.webp",
-          text2: "主题换肤",
-        },
-      ],
+      order_list: info.mine_order_list,
+      tool_list: info.mine_tool_list,
     };
   },
   created() {

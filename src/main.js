@@ -11,15 +11,10 @@ import router from './router'
 //导入vuex文件
 import store from './store'
 
-import area from "./assets/js/area";
-
-import info from "./assets/js/info";
 
 import axios from 'axios'
 
 Vue.prototype.axios = axios
-Vue.prototype.area = area
-Vue.prototype.info = info
 axios.defaults.baseURL = 'http://localhost:3001'
 
 //按需引入vant-ui
@@ -58,8 +53,25 @@ import {
     CellGroup,
     NavBar,
     AddressList,
-    AddressEdit
+    AddressEdit,
+    SwipeCell,
+    Stepper,
+    SubmitBar,
+    Checkbox,
+    CheckboxGroup,
+    Sticky,
+    Dialog,
 } from 'vant';
+
+
+Vue.use(Dialog);
+Vue.use(Sticky);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
+Vue.use(SubmitBar);
+Vue.use(Stepper);
+Vue.use(SwipeCell);
+
 
 
 Vue.use(AddressEdit);

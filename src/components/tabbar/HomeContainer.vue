@@ -15,7 +15,10 @@
     </div>
 
     <!-- 轮播图 -->
-    <van-swipe :autoplay="3000" :style="{height: scrollerWidth * 0.32 + 'px'}">
+    <van-swipe
+      :autoplay="3000"
+      :style="{ height: scrollerWidth * 0.32 + 'px' }"
+    >
       <van-swipe-item v-for="(image, index) in images" :key="index">
         <img v-lazy="image" />
       </van-swipe-item>
@@ -57,119 +60,124 @@
       </van-grid>
     </div>
 
-
-<!-- 推荐榜单 -->
-<div class="recommend" >
-  <h4 class="recommend_head">推荐榜单</h4>
-    <van-row gutter="0"  type="flex" justify="center">
-  <van-col span="8">
-     <div
-      :style="{
-        height: scrollerWidth * 0.354 + 'px',
-        width: scrollerWidth * 0.3 + 'px',
-      }"
-      class="vertical-swipe"
-    >
-      <div class="van-swipe-item recommend-left">
-        <div class="head-img">
-          <img
-            src="/src/assets/img/home_imgs/recommend/recommend_05.webp"
+    <!-- 推荐榜单 -->
+    <div class="recommend">
+      <h4 class="recommend_head">推荐榜单</h4>
+      <van-row gutter="0" type="flex" justify="center">
+        <van-col span="8">
+          <div
             :style="{
-              height: scrollerWidth * 0.2 + 'px',
-              width: scrollerWidth * 0.2 + 'px',
+              height: scrollerWidth * 0.354 + 'px',
+              width: scrollerWidth * 0.3 + 'px',
             }"
-          />
-        </div>
-        <div
-          class="text"
-          :style="{
-            height: scrollerWidth * 0.124 + 'px',
-            'padding-bottom': scrollerWidth * 0.187 + 'px',
-          }"
-        >
-          <p class="popular"><span>人气榜</span></p>
-          <p :style="{ 'padding-top': scrollerWidth * 0.04 + 'px'}">电脑DIY配件榜</p>
-          <span>卖爆3132件</span>
-        </div>
-      </div>
+            class="vertical-swipe"
+          >
+            <div class="van-swipe-item recommend-left">
+              <div class="head-img">
+                <img
+                  src="/src/assets/img/home_imgs/recommend/recommend_05.webp"
+                  :style="{
+                    height: scrollerWidth * 0.2 + 'px',
+                    width: scrollerWidth * 0.2 + 'px',
+                  }"
+                />
+              </div>
+              <div
+                class="text"
+                :style="{
+                  height: scrollerWidth * 0.124 + 'px',
+                  'padding-bottom': scrollerWidth * 0.187 + 'px',
+                }"
+              >
+                <p class="popular"><span>人气榜</span></p>
+                <p :style="{ 'padding-top': scrollerWidth * 0.04 + 'px' }">
+                  电脑DIY配件榜
+                </p>
+                <span>卖爆3132件</span>
+              </div>
+            </div>
+          </div>
+        </van-col>
+        <van-col span="8">
+          <van-swipe
+            :style="{
+              height: scrollerWidth * 0.354 + 'px',
+              width: scrollerWidth * 0.3 + 'px',
+            }"
+            vertical
+            class="vertical-swipe"
+            :touchable="false"
+            :autoplay="3000"
+            :duration="1000"
+            :show-indicators="false"
+          >
+            <van-swipe-item
+              v-for="(item, index) in vertical_swipe"
+              :key="index"
+            >
+              <div class="head-img">
+                <img
+                  :src="item.img_url"
+                  :style="{
+                    height: scrollerWidth * 0.2 + 'px',
+                    width: scrollerWidth * 0.2 + 'px',
+                  }"
+                />
+              </div>
+              <div
+                class="text"
+                :style="{
+                  height: scrollerWidth * 0.124 + 'px',
+                  'padding-bottom': scrollerWidth * 0.187 + 'px',
+                }"
+              >
+                <p class="popular"><span>人气榜</span></p>
+                <p :style="{ 'padding-top': scrollerWidth * 0.04 + 'px' }">
+                  {{ item.title }}
+                </p>
+                <span>{{ item.text }}</span>
+              </div>
+            </van-swipe-item>
+          </van-swipe>
+        </van-col>
+        <van-col span="8">
+          <div
+            :style="{
+              height: scrollerWidth * 0.354 + 'px',
+              width: scrollerWidth * 0.3 + 'px',
+            }"
+            class="vertical-swipe"
+          >
+            <div class="van-swipe-item recommend-right">
+              <div class="head-img">
+                <img
+                  src="/src/assets/img/home_imgs/recommend/recommend_04.webp"
+                  :style="{
+                    height: scrollerWidth * 0.2 + 'px',
+                    width: scrollerWidth * 0.2 + 'px',
+                  }"
+                />
+              </div>
+              <div
+                class="text"
+                :style="{
+                  height: scrollerWidth * 0.124 + 'px',
+                  'padding-bottom': scrollerWidth * 0.187 + 'px',
+                }"
+              >
+                <p class="popular"><span>人气榜</span></p>
+                <p :style="{ 'padding-top': scrollerWidth * 0.04 + 'px' }">
+                  人气智能电视榜
+                </p>
+                <span>卖爆9.1万件</span>
+              </div>
+            </div>
+          </div>
+        </van-col>
+      </van-row>
     </div>
-  </van-col>
-  <van-col span="8">
-     <van-swipe
-      :style="{
-        height: scrollerWidth * 0.354 + 'px',
-        width: scrollerWidth * 0.3 + 'px',
-      }"
-      vertical
-      class="vertical-swipe"
-      :touchable="false"
-      :autoplay="3000"
-      :duration="1000"
-      :show-indicators="false"
-    >
-      <van-swipe-item v-for="(item, index) in vertical_swipe" :key="index">
-        <div class="head-img">
-          <img
-            :src="item.img_url"
-            :style="{
-              height: scrollerWidth * 0.2 + 'px',
-              width: scrollerWidth * 0.2 + 'px',
-            }"
-          />
-        </div>
-        <div
-          class="text"
-          :style="{
-            height: scrollerWidth * 0.124 + 'px',
-            'padding-bottom': scrollerWidth * 0.187 + 'px',
-          }"
-        >
-          <p class="popular"><span>人气榜</span></p>
-          <p :style="{ 'padding-top': scrollerWidth * 0.04 + 'px'}">{{item.title}}</p>
-          <span>{{item.text}}</span>
-        </div>
-      </van-swipe-item>
-    </van-swipe>
-  </van-col>
- <van-col span="8">
-     <div
-      :style="{
-        height: scrollerWidth * 0.354 + 'px',
-        width: scrollerWidth * 0.3 + 'px',
-      }"
-      class="vertical-swipe"
-    >
-      <div class="van-swipe-item recommend-right">
-        <div class="head-img">
-          <img
-            src="/src/assets/img/home_imgs/recommend/recommend_04.webp"
-            :style="{
-              height: scrollerWidth * 0.2 + 'px',
-              width: scrollerWidth * 0.2 + 'px',
-            }"
-          />
-        </div>
-        <div
-          class="text"
-          :style="{
-            height: scrollerWidth * 0.124 + 'px',
-            'padding-bottom': scrollerWidth * 0.187 + 'px',
-          }"
-        >
-          <p class="popular"><span>人气榜</span></p>
-          <p :style="{ 'padding-top': scrollerWidth * 0.04 + 'px'}">人气智能电视榜</p>
-          <span>卖爆9.1万件</span>
-        </div>
-      </div>
-    </div>
-  </van-col>
-</van-row>
-</div>
 
-
-
-
-<!-- 中部田字宫格 -->
+    <!-- 中部田字宫格 -->
     <div class="content-gird">
       <van-grid :column-num="2">
         <van-grid-item
@@ -280,80 +288,34 @@
         </van-col>
       </van-row>
     </div>
- 
   </div>
 </template>
 
 <script>
-
+import { Toast } from 'vant';
+import info from '../../assets/js/info.js'
 export default {
   data() {
     return {
       loading: true,
-      scrollerWidth: window.innerWidth,//当前设备屏幕宽
+      scrollerWidth: window.innerWidth, //当前设备屏幕宽
       images: [], //轮播图数组
-       vertical_swipe:[
-        {
-          img_url:'/src/assets/img/home_imgs/recommend/recommend_01.webp',
-          title:'休闲饼干零食榜',
-          text:'卖爆9.1万件'
-        },
-        {
-          img_url:'/src/assets/img/home_imgs/recommend/recommend_02.webp',
-          title:'贴合水润面膜棒',
-          text:'卖爆2.6万件'
-        },
-         {
-          img_url:'/src/assets/img/home_imgs/recommend/recommend_03.webp',
-          title:'滋润营养乳液榜',
-          text:'卖爆5752万件'
-        }
-      ],
-
-      content_gird_lsit: [
-        {
-          title: "电脑DIY配件榜",
-          title_badge: "人气榜",
-          title_two: "卖爆3318件",
-          img_one: "/src/assets/img/home_imgs/01.webp",
-          img_two: "/src/assets/img/home_imgs/02.webp",
-
-          title2: "人气轻薄本榜",
-          title_badge2: "趋势榜",
-          title_two2: "本周趋势上升59%",
-          img_one2: "/src/assets/img/home_imgs/05.webp",
-          img_two2: "/src/assets/img/home_imgs/06.webp",
-        },
-        {
-          title: "乐享鲜汤炖锅榜",
-          title_badge: "人气榜",
-          title_two: "卖爆5097件",
-          img_one: "/src/assets/img/home_imgs/03.webp",
-          img_two: "/src/assets/img/home_imgs/04.webp",
-
-          title2: "时尚保鲜冰箱榜",
-          title_badge2: "趋势榜",
-          title_two2: "本周趋势上升71%",
-          img_one2: "/src/assets/img/home_imgs/07.webp",
-          img_two2: "/src/assets/img/home_imgs/08.webp",
-        },
-      ],
+      vertical_swipe: info.home_vertical_swipe,//推荐榜单竖轮播图
+      content_gird_lsit: info.home_content_gird,//人气榜趋势榜
       product_list: [], //商品数组
-      icons: [],//导航图标
+      icons: info.home_icon, //导航图标
     };
   },
   created() {
     this.getSwipeImg();
     this.getProductList();
-    this.getIcons();
   },
-mounted(){
-  this.loading = false;
-},
+  mounted() {
+    this.loading = false;
+  },
   methods: {
     getFocus() {
       this.$router.push("/search");
-       
     },
 
     //获取轮播图
@@ -369,18 +331,7 @@ mounted(){
           console.log(error);
         });
     },
-    getIcons() {
-      this.axios
-        .get("/getIcons")
-        .then((response) => {
-          response.data.forEach((element) => {
-            this.icons.push(element);
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
+
 
     //获取底部product_list数据
     getProductList() {
@@ -390,6 +341,7 @@ mounted(){
           this.product_list = response.data;
         })
         .catch((error) => {
+          Toast.fail('获取数据失败')
           console.log(error);
         });
     },
@@ -404,13 +356,13 @@ mounted(){
   .app-home .van-grid-item__text {
     font-size: 20px !important;
   }
- 
+
   .product_list .van-col--12 .product_text {
     padding: 20px 17px 0 17px !important;
     margin-bottom: 20px !important;
   }
-   .product_list .van-col--12 .title {
-   margin-bottom: 0px !important;
+  .product_list .van-col--12 .title {
+    margin-bottom: 0px !important;
   }
 }
 
@@ -431,8 +383,6 @@ mounted(){
 .home-search input::-webkit-input-placeholder {
   color: #f0e0dc !important;
 }
-
-
 
 /* content-gird */
 .content-gird {
@@ -479,21 +429,19 @@ span {
 @media screen and (min-width: 767px) {
   //竖向轮播
   .text {
-  p{
-    font-size: 27px !important;
-  }
-  span{
-    font-size: 20px !important;
-    
-  }
-  .popular{
-    span{
-      margin-right: -39px !important;
+    p {
+      font-size: 27px !important;
+    }
+    span {
+      font-size: 20px !important;
+    }
+    .popular {
+      span {
+        margin-right: -39px !important;
+      }
     }
   }
 }
-}
-
 
 //搜索框固定
 .search-fixed {
@@ -513,29 +461,25 @@ span {
   height: 100%;
 }
 
-
-
 //竖轮播图
-.recommend{
+.recommend {
   padding: 0 2%;
-  .recommend_head{
+  .recommend_head {
     padding: 0 2%;
   }
 }
 .vertical-swipe {
-
   border-radius: 5%;
   overflow: hidden;
   text-align: center;
   margin: 0 auto;
-   margin-top: 10%;
-  .van-swipe-item{
-  background-image: -webkit-linear-gradient(right, #ff6600 0%, #ff9b00 100%);
+  margin-top: 10%;
+  .van-swipe-item {
+    background-image: -webkit-linear-gradient(right, #ff6600 0%, #ff9b00 100%);
   }
   .recommend-right,
-  .recommend-left
-  {
-    background-image: -webkit-linear-gradient(right, #E0A26C 0%, #E8B58B 100%);
+  .recommend-left {
+    background-image: -webkit-linear-gradient(right, #e0a26c 0%, #e8b58b 100%);
   }
   .head-img {
     background-color: #fff;
@@ -564,24 +508,16 @@ span {
     }
     span {
       font-size: 12px;
-      color: #F6E3D2;
-
+      color: #f6e3d2;
     }
   }
 }
 
-
-
-
-
-
-
-
 //content-gird
 .content-gird {
-    .van-hairline--top::after {
+  .van-hairline--top::after {
     border-top-width: 0px;
-}
+  }
   .first-text {
     padding: 10px 10px 0 10px;
     span:nth-child(1) {
