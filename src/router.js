@@ -1,17 +1,17 @@
 import VueRouter from 'vue-router'
 
 //导入tabbar路由组件
-import HomeContainer from './components/tabbar/HomeContainer.vue'
-import ClassifyContainer from './components/tabbar/ClassifyContainer.vue'
-import SearchContainer from './components/tabbar/SearchContainer.vue'
-import ShopcarContainer from './components/tabbar/ShopcarContainer.vue'
-import MineContainer from './components/tabbar/MineContainer.vue'
+import HomeContainer from '../src/views/HomeContainer.vue'
+import ClassifyContainer from '../src/views/ClassifyContainer.vue'
+import SearchContainer from '../src/views/SearchContainer.vue'
+import ShopcarContainer from '../src/views/ShopcarContainer.vue'
+import MineContainer from '../src/views/MineContainer.vue'
 
 //导入商品详情页面路由组件
 import ProductPetails from './components/product/ProductPetails.vue'
 
 //导入数码产品页面路由组件
-import DigitalProductContainer from './components/home_child/DigitalProductContainer.vue'
+import DigitalProductContainer from './components/home/DigitalProductContainer.vue'
 
 //登录注册组件
 import LoginContainer from './components/register&login/LoginContainer.vue'
@@ -22,6 +22,8 @@ import SetContainer from './components/mine/SetContainer.vue'
 //个人页面 我的收货地址 组件
 import MyAddressContainer from './components/mine/MyAddressContainer.vue'
 
+
+import Settlement from './components/product/Settlement.vue'
 // 创建路由对象
 const router = new VueRouter({
     routes: [ // 配置路由规则
@@ -48,10 +50,27 @@ const router = new VueRouter({
         //我的收货地址
         { path: '/mine/set/myAddress', component: MyAddressContainer },
 
+        //结算页面
+        { path: '/shopcar/settlement', name: 'settlement', component: Settlement },
+
     ],
     linkActiveClass: 'van-tabbar-item--active',
 
 })
 
+
+
+router.beforeEach((to, from, next) => {
+
+    const isLogin = window.localStorage.getItem('isLogin')
+    if (isLogin) return next()
+    else {
+        if (to.path === '/shopcar' || to.path === '/mine') {
+            next('/login')
+        }
+        next();
+    }
+
+})
 
 export default router

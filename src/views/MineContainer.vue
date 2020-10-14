@@ -103,7 +103,7 @@
 </template>
 
 <script>
-import info from '../../assets/js/info.js'
+import info from '../assets/js/info.js'
 export default {
   data() {
     return {

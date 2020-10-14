@@ -181,9 +181,9 @@
     <div class="content-gird">
       <van-grid :column-num="2">
         <van-grid-item
-          to="/test"
           v-for="(item, index) in content_gird_lsit"
           :key="index"
+           @click="notAvailable"
         >
           <div class="first-text">
             <span :style="{ 'font-size': scrollerWidth * 0.0373 + 'px' }">{{
@@ -216,7 +216,7 @@
 
       <van-grid :column-num="2">
         <van-grid-item
-          to="/test"
+         @click="notAvailable"
           v-for="(item, index) in content_gird_lsit"
           :key="index"
         >
@@ -293,7 +293,7 @@
 
 <script>
 import { Toast } from 'vant';
-import info from '../../assets/js/info.js'
+import info from '../assets/js/info.js'
 export default {
   data() {
     return {
@@ -345,6 +345,12 @@ export default {
           console.log(error);
         });
     },
+
+
+
+    notAvailable(){
+      Toast('暂无后续逻辑~')
+    }
   },
 };
 </script>

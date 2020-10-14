@@ -21337,9 +21337,6 @@ exports.default = {
           discount: 122,
           s1: "1215",
           s2: "1193",
-          s3: "0",
-          s4: "0",
-          s5: "0",
           stock_num: 20, //库存
           goods_id: 946755
         }, {
@@ -21348,9 +21345,6 @@ exports.default = {
           discount: 112,
           s1: "1215",
           s2: "1194",
-          s3: "0",
-          s4: "0",
-          s5: "0",
           stock_num: 2, //库存
           goods_id: 946755
         }, {
@@ -21359,9 +21353,6 @@ exports.default = {
           discount: 132,
           s1: "30349",
           s2: "1193",
-          s3: "0",
-          s4: "0",
-          s5: "0",
           stock_num: 40, //库存
           goods_id: 946755
         }, {
@@ -21370,12 +21361,10 @@ exports.default = {
           discount: 100,
           s1: "30349",
           s2: "1194",
-          s3: "0",
-          s4: "0",
-          s5: "0",
           stock_num: 50, //库存
           goods_id: 946755
         }],
+
         price: "", //价格
         stock_num: "", // 商品总库存
         none_sku: false, // 是否无规格商品 false正常显示那些可供选择的标准，此处是颜色和尺寸

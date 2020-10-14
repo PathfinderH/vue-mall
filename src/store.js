@@ -10,6 +10,9 @@ let isLogin = JSON.parse(localStorage.getItem('isLogin') || false)
 let currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]')
 let address = JSON.parse(localStorage.getItem('address') || '[]')
 
+let shopcarOrBuyFlag = JSON.parse(localStorage.getItem('shopcarOrBuyFlag') || false)
+let directBuyGoods = JSON.parse(localStorage.getItem('directBuyGoods') || '{}')
+
 let store = new Vuex.Store({
 
     state: {
@@ -17,10 +20,25 @@ let store = new Vuex.Store({
         check_all: check_all, //全选按钮状态
         isLogin: isLogin, //用户登录状态
         currentUser: currentUser, //当前用户信息
-        address: address //收货地址
+        address: address, //收货地址
+
+        shopcarOrBuyFlag: shopcarOrBuyFlag, //判断用户提交订单时是从购物车提交还是直接购买
+        directBuyGoods: directBuyGoods
     },
 
     mutations: {
+
+        //将直接购买的商品id保存到localstore中
+        saveDirectBuyGoodsId(state, info) {
+            state.directBuyGoods = info
+            localStorage.setItem('directBuyGoods', JSON.stringify(state.directBuyGoods))
+        },
+
+        //判断用户提交订单时是从购物车提交还是直接购买
+        saveShopcarOrBuyFlag(state, flag) {
+            state.shopcarOrBuyFlag = flag
+            localStorage.setItem('shopcarOrBuyFlag', JSON.stringify(state.shopcarOrBuyFlag))
+        },
 
 
         //新增用户收货地址信息

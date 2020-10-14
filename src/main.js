@@ -60,7 +60,7 @@ import {
     Checkbox,
     CheckboxGroup,
     Sticky,
-    Dialog,
+    Dialog
 } from 'vant';
 
 

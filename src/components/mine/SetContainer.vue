@@ -69,7 +69,7 @@ export default {
     },
 
     test() {
-      Toast.fail("功能未完成");
+      Toast.fail("暂无后续逻辑~");
     },
   },
 };
