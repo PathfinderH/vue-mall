@@ -1,5 +1,5 @@
 <template>
-  <div class="shopcar_content" v-show="$store.state.isLogin">
+  <div class="shopcar_content">
     <!-- <div class="backgroundImg" :style="{ height: backgroundImgHeight }"></div> -->
 
     <div class="shopcar">
@@ -8,7 +8,7 @@
         <div class="car_bar">
           <!-- <p>{{ $store.getters.getGoodsSelected }}</p> -->
           <h2 class="title">购物车({{ $store.getters.getAllCount }})</h2>
-          <span class="manage" @click="manage">管理</span>
+          <span  v-if="!shopcar_falg" class="manage" @click="manage">管理</span>
         </div>
         <p class="info">
           共选中了{{ $store.getters.getGoodsCountAndAmount.count }}件宝贝
@@ -34,6 +34,7 @@
               integer
             />
             <van-checkbox
+            checked-color="#FF6B00"
               ref="checkbox"
               v-model="$store.getters.getGoodsSelected[item.id]"
         
@@ -47,7 +48,7 @@
       </div>
 
       <!-- 购物车为空时内容 -->
-      <div class="shopcar_null" v-show="shopcar_falg">
+      <div class="shopcar_null" v-if="shopcar_falg">
         <div class="null_logo">
           <img src="/src/assets/img/home_imgs/null_logo.webp" />
         </div>
@@ -62,28 +63,29 @@
     </div>
     <!-- 提交订单 -->
     <van-submit-bar
+      v-if="!shopcar_falg"
       button-color="-webkit-linear-gradient(right, #ff5000 0%, #ff8400 100%)"
       :price="$store.getters.getGoodsCountAndAmount.amount"
       :button-text="'结算(' + $store.getters.getGoodsCountAndAmount.count + ')'"
       @submit="onSubmit"
     >
-      <van-checkbox v-model="$store.state.check_all" @click="checkAll">全选</van-checkbox>
+      <van-checkbox checked-color="#FF6B00" v-model="$store.state.check_all" @click="checkAll">全选</van-checkbox>
     </van-submit-bar>
 
     <!-- 删除商品 -->
-    <transition name="van-fade">
       <van-submit-bar
+        v-if="!shopcar_falg"
         class="delete-product"
         v-show="delete_flag"
         button-text="删除"
         @submit="delete_product"
         button-type="default"
       >
-        <van-checkbox v-model="$store.state.check_all" class="delete_check" @click="checkAll"
+        <van-checkbox checked-color="#FF6B00" v-model="$store.state.check_all" class="delete_check" @click="checkAll"
           >全选</van-checkbox
         >
       </van-submit-bar>
-    </transition>
+
   </div>
 </template>
 

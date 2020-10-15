@@ -44,7 +44,9 @@
             <span>共{{ $store.getters.getGoodsCount[item.id] }}件</span
             ><span>小计：</span
             ><span
-              >￥{{ $store.getters.getGoodsCount[item.id] * item.price }}</span
+              >￥{{
+                (item.price * 100 * $store.getters.getGoodsCount[item.id]) / 100
+              }}</span
             >
           </p>
         </template>
@@ -56,20 +58,16 @@
       <van-card
         v-for="(item, index) in settlementList"
         :key="index"
-        :num="$store.state.directBuyGoods.num"
+        :num="$store.state.directBuyGoods.count"
         :price="item.price"
         :title="item.title"
         :thumb="item.img_url"
       >
         <template #footer>
           <p>
-            <span>共{{ $store.state.directBuyGoods.num }}件</span
+            <span>共{{ $store.state.directBuyGoods.count }}件</span
             ><span>小计：</span
-            ><span
-              >￥{{
-                $store.state.directBuyGoods.num * settlementList[0].price
-              }}</span
-            >
+            ><span>￥{{ $store.state.directBuyGoods.count * price }}</span>
           </p>
         </template>
       </van-card>
@@ -93,12 +91,14 @@
     <!-- (直接购买结算) -->
     <div v-if="!$store.state.shopcarOrBuyFlag">
       <van-submit-bar
-        :price="totalPrice"
+        :price="price * $store.state.directBuyGoods.count * 100"
         button-text="提交订单"
-        @submit="onSubmit"
+        @submit="onSubmitBuy"
       >
         <template #default>
-          <span class="total">共记{{ $store.state.directBuyGoods.num }}件</span>
+          <span class="total"
+            >共记{{ $store.state.directBuyGoods.count }}件</span
+          >
         </template>
       </van-submit-bar>
     </div>
@@ -112,19 +112,46 @@ export default {
       settlementList: [], //购买的商品
       defaultAddress: {},
       isAddress: false,
+      price: "",
     };
   },
   created() {
-            console.log(this.settlementList);
     this.getSettlement();
     this.getAddress();
     this.ifAddress();
   },
   methods: {
+    //从购物车结算
     onSubmit() {
-      Toast.success("购买成功");
-    },
+      if (this.isAddress) return Toast.fail("请选择默认收货地址");
+      this.$store.state.car.forEach((element) => {
+        if (element.selected == true) {
+          this.$store.commit("saveOrderForm", element);
+        }
+      });
+      let newCar = [];
+      this.$store.state.car.forEach((element) => {
+        if (element.selected == false) {
+          newCar.unshift(element);
+        }
+        return newCar;
+      });
 
+      this.$store.commit("removeProduct", newCar);
+
+      Toast.success("购买成功~");
+
+      this.$router.push("/mine/orderForm");
+    },
+    //直接购买
+    onSubmitBuy() {
+      if (this.isAddress) return Toast.fail("请选择默认收货地址");
+      this.$store.commit("saveOrderForm", this.$store.state.directBuyGoods);
+      Toast.success("购买成功~");
+
+      this.getSettlement()
+      this.$router.push("/mine/orderForm");
+    },
     //判断是否有默认地址
     ifAddress() {
       if (Object.values(this.defaultAddress).length == 0) {
@@ -136,38 +163,32 @@ export default {
 
     //获取购买商品数据
     getSettlement() {
-      if (this.$store.state.shopcarOrBuyFlag) {
-        this.$store.state.car.forEach((element) => {
-          if (element.selected == true) {
-            this.settlementList.push(element);
-          }
-        });
+      this.$store.state.car.forEach((element) => {
+        if (element.selected == true) {
+          this.settlementList.push(element);
+        }
+      });
 
-        let idArr = [];
+      let idArr = [];
+      if (this.$store.state.shopcarOrBuyFlag) {
         this.settlementList.forEach((item) => {
           idArr.push(item.id);
+          return idArr;
         });
-
-        this.axios
-          .get("/getShopcar/" + idArr.join(","))
-          .then((response) => {
-            this.settlementList = response.data;
-          })
-          .catch((error) => {
-            Toast.fail("获取数据失败");
-            console.log(error);
-          });
       } else {
-        this.axios
-          .get("/getShopcar/" + this.$store.state.directBuyGoods.id)
-          .then((response) => {
-            this.settlementList = response.data;
-          })
-          .catch((error) => {
-            Toast.fail("获取数据失败");
-            console.log(error);
-          });
+        idArr.push(this.$store.state.directBuyGoods.id);
       }
+
+      this.axios
+        .get("/getShopcar/" + idArr.join(","))
+        .then((response) => {
+          this.settlementList = response.data;
+          this.price = response.data[0].price;
+        })
+        .catch((error) => {
+          Toast.fail("获取数据失败");
+          console.log(error);
+        });
     },
 
     //获取默认地址
@@ -182,12 +203,6 @@ export default {
           return true;
         }
       });
-    },
-  },
-  computed: {
-    totalPrice() {
-        // return this.$store.state.directBuyGoods.num * this.settlementList[0].price
-      return 200;
     },
   },
 };

@@ -125,6 +125,24 @@ export default {
   },
 };
 </script>
-
+<style>
+  .van-address-edit__buttons .van-button--danger {
+  background-image: -webkit-linear-gradient(
+    right,
+    #ff5000 0%,
+    #ff8400 100%
+  ) !important;
+  border: none;
+}
+</style>
 <style lang="scss" scoped>
+.van-button--danger {
+  background-image: -webkit-linear-gradient(
+    right,
+    #ff5000 0%,
+    #ff8400 100%
+  ) !important;
+  border: none;
+}
+
 </style>

@@ -13,6 +13,9 @@ let address = JSON.parse(localStorage.getItem('address') || '[]')
 let shopcarOrBuyFlag = JSON.parse(localStorage.getItem('shopcarOrBuyFlag') || false)
 let directBuyGoods = JSON.parse(localStorage.getItem('directBuyGoods') || '{}')
 
+
+let orderForm = JSON.parse(localStorage.getItem('orderForm') || '[]')
+
 let store = new Vuex.Store({
 
     state: {
@@ -23,11 +26,18 @@ let store = new Vuex.Store({
         address: address, //收货地址
 
         shopcarOrBuyFlag: shopcarOrBuyFlag, //判断用户提交订单时是从购物车提交还是直接购买
-        directBuyGoods: directBuyGoods
+        directBuyGoods: directBuyGoods, //直接购买的商品的id和数量
+
+        orderForm: orderForm //订单
     },
 
     mutations: {
 
+        //将购买的商品保存
+        saveOrderForm(state, info) {
+            state.orderForm.push(info);
+            localStorage.setItem('orderForm', JSON.stringify(state.orderForm))
+        },
         //将直接购买的商品id保存到localstore中
         saveDirectBuyGoodsId(state, info) {
             state.directBuyGoods = info
@@ -57,6 +67,14 @@ let store = new Vuex.Store({
 
         //修改用户收货地址信息
         editAdress(state, info) {
+            if (info.isDefault == true) {
+                state.address.some((item) => {
+                    if (item.isDefault == true) {
+                        item.isDefault = false;
+                        return true;
+                    }
+                })
+            }
             state.address.splice(info.id, 1, info);
             localStorage.setItem('address', JSON.stringify(state.address))
         },
@@ -155,11 +173,32 @@ let store = new Vuex.Store({
             localStorage.setItem('car', JSON.stringify(state.car))
         },
 
+        //为每次购买的商品添加索引
+        addIndexOrderForm(state) {
+            let index = 0;
+            state.orderForm.forEach(el => {
+                el.index = index;
+                index += 1;
+            })
+            localStorage.setItem('orderForm', JSON.stringify(state.orderForm))
+        }
+
     },
 
 
 
+
     getters: {
+
+
+        // 获取订单中每个商品的数量
+        getOrderFormCount(state) {
+            let o = {}
+            state.orderForm.forEach(item => {
+                o[item.index] = item.count
+            })
+            return o;
+        },
 
 
         //获取购物车中所有商品数量

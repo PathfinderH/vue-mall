@@ -27,19 +27,19 @@ export default {
 
 
 <style lang="scss" scoped>
-//动画样式
-.v-enter{
-  opacity: 0;
-  transform: translateX(100%);
-}
-.v-leave-to{
-  opacity: 0;
-  transform: translateX(-100%);
-}
-.v-enter-active,
-.v-leave-active{
-  transition: all 0.1s ease;
-}
+// //动画样式
+// .v-enter{
+//   opacity: 0;
+//   transform: translateX(100%);
+// }
+// .v-leave-to{
+//   opacity: 0;
+//   transform: translateX(-100%);
+// }
+// .v-enter-active,
+// .v-leave-active{
+//   transition: all 0.1s ease;
+// }
 
 .app-container{
   overflow-x: hidden;

@@ -22,8 +22,12 @@ import SetContainer from './components/mine/SetContainer.vue'
 //个人页面 我的收货地址 组件
 import MyAddressContainer from './components/mine/MyAddressContainer.vue'
 
-
+//订单结算页面
 import Settlement from './components/product/Settlement.vue'
+
+//我的订单页面
+import OrderForm from './components/mine/OrderFome.vue'
+
 // 创建路由对象
 const router = new VueRouter({
     routes: [ // 配置路由规则
@@ -51,7 +55,10 @@ const router = new VueRouter({
         { path: '/mine/set/myAddress', component: MyAddressContainer },
 
         //结算页面
-        { path: '/shopcar/settlement', name: 'settlement', component: Settlement },
+        { path: '/shopcar/settlement', component: Settlement },
+
+        //订单页面
+        { path: '/mine/orderForm', name: 'orderForm', component: OrderForm },
 
     ],
     linkActiveClass: 'van-tabbar-item--active',

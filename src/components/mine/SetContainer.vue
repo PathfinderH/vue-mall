@@ -68,8 +68,8 @@ export default {
       this.$router.push("/login");
     },
 
-    test() {
-      Toast.fail("暂无后续逻辑~");
+    nullClick() {
+      Toast("暂无后续逻辑~");
     },
   },
 };

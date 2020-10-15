@@ -251,7 +251,6 @@ export default {
 
     //商品购买sku
     onAddCartClicked(sku) {
-      Toast.success("添加成功,在购物车等亲~");
       let goodsInfo = {
         id: sku.goodsId,
         count: sku.selectedNum,
@@ -261,18 +260,19 @@ export default {
       if (this.flag == false) {
         this.$store.commit("addToCar", goodsInfo);
         this.$store.commit("getAllSelected_false");//判断全选按钮
+        Toast.success("添加成功,在购物车等亲~");
       } else if (this.flag == true) {
         this.$store.commit('saveShopcarOrBuyFlag',false);
        this.$router.push("/shopcar/settlement");
 
       let goods = {
         id:sku.goodsId,
-        num:sku.selectedNum
+        count:sku.selectedNum
       }
 
       this.$store.commit('saveDirectBuyGoodsId',goods);
 
-        Toast.success("购买成功");
+        Toast("跳转订单支付界面~");
       }
       this.showBase = false;
     },

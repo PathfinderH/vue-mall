@@ -1,6 +1,10 @@
 <template>
-  <div class="mine-container" :style="{ width: scrollerWidth + 'px'}" v-show="$store.state.isLogin">
-    <div class="header" >
+  <div
+    class="mine-container"
+    :style="{ width: scrollerWidth + 'px' }"
+    v-show="$store.state.isLogin"
+  >
+    <div class="header">
       <div class="portrait">
         <van-row>
           <van-col span="6"
@@ -11,9 +15,14 @@
               height="4rem"
               src="http://gw.alicdn.com/sns_logo/i4/O1CN01RQD3d21PgVCYh3yBd_!!0-mytaobao.jpg_100x100q90_.webp"
           /></van-col>
-          <van-col span="12"><h3>用户：{{$store.state.currentUser[0].username }}</h3></van-col>
+          <van-col span="12"
+            ><h3>用户：{{ $store.state.currentUser[0].username }}</h3></van-col
+          >
           <van-col span="6" class="set"
-            ><h3><router-link to="/mine/set"><van-icon name="setting-o" /></router-link></h3
+            ><h3>
+              <router-link to="/mine/set"
+                ><van-icon name="setting-o"
+              /></router-link></h3
           ></van-col>
         </van-row>
 
@@ -36,74 +45,72 @@
           </van-col>
         </van-row>
       </div>
-
     </div>
 
-<!-- 我的订单 -->
-    
- <div class="my-order">
-        <div class="head">
-          <van-row>
-            <van-col span="12"><span>我的订单</span></van-col>
-            <van-col span="12" class="all-order"
-              ><span>查看全部订单</span></van-col
-            >
-          </van-row>
-        </div>
-        <div class="content">
-          <van-grid :column-num="5" :border="false">
-            <van-grid-item
-              v-for="(item, index) in  order_list"
-              :key="index"
-              :icon="item.url"
-              :text="item.text"
-              to="/test"
-            />
-          </van-grid>
-        </div>
+    <!-- 我的订单 -->
+
+    <div class="my-order">
+      <div class="head">
+        <van-row>
+          <van-col span="12"><span>我的订单</span></van-col>
+          <van-col
+            span="12"
+            class="all-order"
+            @click="$router.push('/mine/orderForm')"
+            ><span>查看全部订单</span></van-col
+          >
+        </van-row>
       </div>
-
-<!-- 必备工具 -->
-<div class="my-order">
-        <div class="head">
-          <van-row>
-            <van-col span="12"><span>必备工具</span></van-col>
-            <van-col span="12" class="all-order"
-              ><span>查看全部工具</span></van-col
-            >
-          </van-row>
-        </div>
-        <div class="content tool">
-          <van-grid :column-num="4" :border="false">
-            <van-grid-item
-              v-for="(item, index) in tool_list"
-              :key="index"
-              :icon="item.url"
-              :text="item.text"
-              to="/test"
-            />
-          </van-grid>
-          <van-grid :column-num="4" :border="false">
-            <van-grid-item
-              v-for="(item, index) in tool_list"
-              :key="index"
-              :icon="item.url2"
-              :text="item.text2"
-              to="/test"
-            />
-          </van-grid>
-        </div>
+      <div class="content">
+        <van-grid :column-num="5" :border="false">
+          <van-grid-item
+            v-for="(item, index) in order_list"
+            :key="index"
+            :icon="item.url"
+            :text="item.text"
+            :to="{ name: 'orderForm', params: { i: index + 1 } }"
+          />
+        </van-grid>
       </div>
+    </div>
 
-
-
-
-
+    <!-- 必备工具 -->
+    <div class="my-order">
+      <div class="head">
+        <van-row>
+          <van-col span="12"><span>必备工具</span></van-col>
+          <van-col span="12" class="all-order"
+            ><span>查看全部工具</span></van-col
+          >
+        </van-row>
+      </div>
+      <div class="content tool">
+        <van-grid :column-num="4" :border="false">
+          <van-grid-item
+            v-for="(item, index) in tool_list"
+            :key="index"
+            :icon="item.url"
+            :text="item.text"
+            @click="iconClick"
+          />
+        </van-grid>
+        <van-grid :column-num="4" :border="false">
+          <van-grid-item
+            v-for="(item, index) in tool_list"
+            :key="index"
+            :icon="item.url2"
+            :text="item.text2"
+            @click="iconClick"
+          />
+        </van-grid>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import info from '../assets/js/info.js'
+import info from "../assets/js/info.js";
+import { Toast } from "vant";
 export default {
   data() {
     return {
@@ -113,12 +120,15 @@ export default {
     };
   },
   created() {
-    if(this.$store.state.isLogin == false){
-      this.$router.push('/login')
+    if (this.$store.state.isLogin == false) {
+      this.$router.push("/login");
     }
   },
-
-
+  methods: {
+    iconClick() {
+      Toast("暂无后续逻辑~");
+    },
+  },
 };
 </script>
 
@@ -140,7 +150,7 @@ export default {
     .set {
       text-align: right;
       padding: 4px 20px 0 0;
-      a{
+      a {
         color: #fff;
       }
     }
@@ -181,24 +191,20 @@ export default {
     background: #fff;
     border-radius: 12px;
     overflow: hidden;
-  .van-grid{
-    height: 100%;
-
-  }
-  .van-grid-item{
-    height: 100%;
-    
-  }
+    .van-grid {
+      height: 100%;
+    }
+    .van-grid-item {
+      height: 100%;
+    }
   }
 }
 
 //必备工具
-.tool{
+.tool {
   height: 152px !important;
-  .van-grid{
+  .van-grid {
     height: 50% !important;
   }
 }
-
-
 </style>
