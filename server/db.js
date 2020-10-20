@@ -12,7 +12,7 @@ exports.base = (sql, data, callback) => {
     });
     //执行连接操作
     connection.connect();
-    //操作数据库(数据库操作也是异步的)
+    //操作数据库
     connection.query(sql, data, (error, results, fields) => {
         if (error) throw error;
         callback(results);

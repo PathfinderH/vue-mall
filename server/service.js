@@ -2,21 +2,15 @@
 const db = require('./db.js');
 
 const fs = require('fs');
-const host = 'http://localhost:3001/'
 
-//获取图片地址函数
-exports.getImgs = (path) => {
-    let filesPath = []
-    let files = fs.readdirSync(path)
-    files.forEach(function(item, index) {
-        filesPath.push(host + path.slice(9) + item)
-    })
-    return filesPath;
-}
 
 //获取轮播图地址
 exports.getSwipeImgs = (req, res) => {
-    let filesPath = exports.getImgs('./public/images/swipe/')
+    let filesPath = []
+    let files = fs.readdirSync('./public/images/swipe/')
+    files.forEach(function(item, index) {
+        filesPath.push('http://localhost:3001/' + './public/images/swipe/'.slice(9) + item)
+    })
     res.json(filesPath)
 }
 
